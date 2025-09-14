@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -66,346 +66,345 @@
   }
   </script>
   <style>
-    :root{
-      --bg:#f7f8fb; --card:#ffffff; --muted:#5b6270; --accent1:#6b46c1; --accent2:#d946ef;
-      --glass: rgba(255,255,255,0.75);
-      --success:#10b981;
-      --shadow: 0 6px 18px rgba(20,22,28,0.06);
-      --radius:20px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+    :root {
+      --bg-color: #f4f4f9;
+      --text-color: #333;
+      --card-bg: #fff;
+      --header-bg: #222;
+      --header-text: #fff;
     }
-    .dark{ --bg:#0b1020; --card:rgba(255,255,255,0.03); --muted:#aeb6c1; --glass: rgba(255,255,255,0.03); --shadow: 0 8px 30px rgba(2,6,23,0.7); }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(107,70,193,0.08), transparent 8%),
-                  radial-gradient(900px 500px at 90% 90%, rgba(217,70,239,0.06), transparent 8%),
-                  var(--bg);
-      color: #0b1220;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:32px 18px;
-      transition: background .35s ease, color .35s ease;
+    body.dark {
+      --bg-color: #181818;
+      --text-color: #eee;
+      --card-bg: #242424;
+      --header-bg: #111;
+      --header-text: #fff;
     }
-    .dark body{ color: #e6eef9 }
-    .container{ max-width:1100px; margin:0 auto; }
-    header{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:28px; }
-    .brand{ display:flex; gap:12px; align-items:center; }
-    .brand .logo{ width:52px; height:52px; border-radius:12px; background:linear-gradient(135deg,var(--accent1),var(--accent2)); display:grid; place-items:center; color:#fff; font-weight:700; box-shadow:var(--shadow) }
-    .brand h1{ margin:0; font-size:18px; letter-spacing:-0.2px }
-    .brand p{ margin:0; font-size:12px; color:var(--muted) }
-    .header-actions{ display:flex; gap:8px; align-items:center }
-    .btn{ border:0; padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:600; background:var(--card); box-shadow:var(--shadow); transition: transform .12s, box-shadow .12s; }
-    .btn:active{ transform:translateY(1px) }
-    .btn.ghost{ background:transparent; border:1px solid rgba(0,0,0,0.06) }
-    .hero{ display:grid; grid-template-columns: 1fr 320px; gap:18px; align-items:center; margin-bottom:26px; }
-    .card{ background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); }
-    h2{ margin:12px 0 6px 0; font-size:28px }
-    p.lead{ margin:0 0 12px 0; color:var(--muted) }
-    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
-    .badge{ font-size:12px; padding:6px 10px; border-radius:999px; background:linear-gradient(90deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01)); color:var(--muted); }
-    .avatar{ width:100%; max-width:260px; aspect-ratio:4/3; border-radius:16px; display:grid; place-items:center; font-size:40px; color:rgba(0,0,0,0.4); background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)) }
-    /* Skills grid */
-    .section-title{ display:flex; align-items:center; justify-content:space-between; margin:22px 0 12px 0 }
-    .skills-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:14px }
-    .skill{ padding:14px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); }
-    .skill .top{ display:flex; align-items:center; justify-content:space-between; gap:10px }
-    .skill h4{ margin:0; font-size:16px }
-    .skill p{ margin:8px 0 0 0; font-size:13px; color:var(--muted) }
-    .progress{ height:10px; background:rgba(0,0,0,0.06); border-radius:999px; overflow:hidden; margin-top:12px }
-    .progress > i{ display:block; height:100%; background:linear-gradient(90deg,var(--accent1),var(--accent2)); width:0; border-radius:999px; transition: width 1s cubic-bezier(.2,.9,.3,1) }
-    .skill .tag{ font-size:11px; padding:6px 8px; border-radius:999px; background:rgba(0,0,0,0.03) }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--header-bg);
+      color: var(--header-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+    nav .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: var(--header-text);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #4dabf7;
+    }
+
+    /* Hamburger */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: var(--header-bg);
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 200px;
+        border-radius: 8px;
+        padding: 1rem;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-bottom: 1rem;
+      transition: transform 0.3s;
+    }
+    header img:hover {
+      transform: scale(1.05);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Dark Mode Button */
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    /* Sections */
+    section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.8s forwards;
+    }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.4s; }
+    section:nth-child(4) { animation-delay: 0.6s; }
+    section:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* Skills */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      text-align: center;
+    }
+    .skill-card {
+      background: var(--bg-color);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform 0.3s, background 0.3s;
+    }
+    .skill-card img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 0.5rem;
+    }
+    .skill-card:hover {
+      transform: translateY(-8px) scale(1.05);
+    }
+
     /* Projects */
-    .projects{ display:grid; gap:12px; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
-    .project .stacks{ margin-top:8px; display:flex; flex-wrap:wrap; gap:8px }
-    .chip{ font-size:12px; padding:6px 8px; border-radius:999px; background:rgba(0,0,0,0.03) }
-    /* Certifications */
-    .certs{ display:flex; gap:12px; flex-wrap:wrap }
-    .cert{ padding:12px; border-radius:12px; display:flex; gap:12px; align-items:center; min-width:220px; }
-    /* contact */
-    form{ display:grid; gap:8px; margin-top:12px }
-    input,textarea{ padding:10px 12px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); background:transparent; font-size:14px }
-    textarea{ min-height:120px; resize:vertical }
-    footer{ margin-top:28px; text-align:center; color:var(--muted) }
-    /* utilities */
-    @media (max-width:900px){
-      .hero{ grid-template-columns: 1fr; }
-      header{ flex-direction:column; align-items:stretch; gap:12px }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
     }
-    /* Dark overrides */
-    .dark .card{ background:var(--card); }
-    .dark .skill{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
-    /* small animations */
-    .fade-in{ opacity:0; transform:translateY(10px); animation:fadeIn .7s forwards; }
-    .fade-in.delay-1{ animation-delay:.06s }
-    .fade-in.delay-2{ animation-delay:.12s }
-    @keyframes fadeIn{ to{ opacity:1; transform:none } }
-    /* icons */
-    .icon{ width:18px;height:18px; display:inline-block; vertical-align:middle }
-    /* focus */
-    input:focus,textarea:focus,button:focus{ outline:3px solid rgba(99,102,241,0.12); outline-offset:3px }
+    .project-card {
+      background: var(--bg-color);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform 0.3s, background 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background: var(--header-bg);
+      color: var(--header-text);
+    }
+    footer a {
+      color: #4dabf7;
+      text-decoration: none;
+      margin: 0 10px;
+    }
   </style>
 </head>
 <body>
-  <div class="container" id="page">
-    <header>
-      <div class="brand">
-        <div class="logo">NA</div>
-        <div>
-          <h1>Nihan Ali V P</h1>
-          <p>Full-Stack Developer — Kerala, India</p>
-        </div>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Nihan Ali VP</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <img src="profile.png" alt="Profile Photo">
+    <h1>Nihan Ali VP</h1>
+    <p>💻 Full-Stack Developer | ⚡ IoT Enthusiast | 🔧 Tech Explorer</p>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+      Hi, I’m <b>Nihan Ali</b>, a passionate developer who loves blending software, hardware, and creativity.  
+      Skilled in programming, IoT, and modern technologies — I build apps, circuits, and solutions that make an impact.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills & Technologies</h2>
+    <div class="skills">
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+        <p>Python</p>
       </div>
-
-      <div class="header-actions">
-        <button class="btn ghost" id="resumeBtn" onclick="openResume()">Resume</button>
-        <button class="btn" id="themeToggle" aria-label="Toggle theme">🌙 Dark</button>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+        <p>C++</p>
       </div>
-    </header>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+        <p>Java</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart">
+        <p>Dart</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+        <p>JavaScript</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+        <p>HTML5 & CSS3</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://img.icons8.com/external-flat-juicy-fish/60/external-iot-internet-of-things-flat-flat-juicy-fish.png" alt="IoT">
+        <p>IoT & Home Automation</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+        <p>Firebase</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+        <p>React</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
+        <p>Flutter</p>
+      </div>
+    </div>
+  </section>
 
-    <main>
-      <section class="hero">
-        <div class="card fade-in">
-          <div style="display:flex;align-items:center;gap:12px;justify-content:space-between;">
-            <div>
-              <div style="display:inline-flex;align-items:center;gap:8px;background:var(--glass);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)">● Available for work</div>
-              <h2>Hi, I’m Nihan Ali V P. <span style="color:var(--muted);font-weight:600">I build clean, fast apps for web & mobile.</span></h2>
-              <p class="lead">Performance, accessibility and developer experience are my priorities. I enjoy turning ideas into working products.</p>
-              <div style="margin-top:12px;">
-                <a href="#projects" class="btn" style="margin-right:8px">View Projects</a>
-                <a href="#contact" class="btn ghost">Contact Me</a>
-              </div>
-            </div>
-            <div style="text-align:right;">
-              <div class="avatar card">
-                <div style="text-align:center;">
-                  <div style="font-size:18px;font-weight:700">N A</div>
-                  <div style="font-size:12px;color:var(--muted);margin-top:6px">Full-Stack • React • Flutter</div>
-                </div>
-              </div>
-              <div style="margin-top:12px;">
-                <div style="padding:10px;border-radius:12px;background:var(--glass);display:flex;gap:10px;align-items:center;justify-content:space-between">
-                  <div style="font-size:13px;color:var(--muted)">Primary</div>
-                  <div style="font-size:13px;font-weight:600">React · Flutter · Node</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <h3>Smart Home Automation</h3>
+        <p>IoT-based automation system controlling lights, fans, and appliances using mobile app.</p>
+      </div>
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>Responsive personal portfolio built with HTML, CSS, and JavaScript for showcasing skills.</p>
+      </div>
+      <div class="project-card">
+        <h3>AI Chatbot</h3>
+        <p>Python-based chatbot for answering FAQs with natural language understanding.</p>
+      </div>
+    </div>
+  </section>
 
-        <aside>
-          <div class="card fade-in delay-1" style="padding:16px; text-align:center;">
-            <h3 style="margin:0 0 6px 0">Contact</h3>
-            <p style="margin:0 0 12px 0;color:var(--muted)">you@example.com</p>
-            <div style="display:flex;gap:8px;justify-content:center">
-              <a class="btn ghost" href="#" onclick="openLink('https://github.com/yourhandle')">GitHub</a>
-              <a class="btn ghost" href="#" onclick="openLink('https://linkedin.com/in/yourhandle')">LinkedIn</a>
-            </div>
-          </div>
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p style="text-align:center;">
+      📧 Email: <a href="mailto:qwerty311980@gmail.com">yourmail@example.com</a><br>
+      🌐 GitHub: <a href="https://github.com/nihan-vp" target="_blank">github.com/yourgithub</a><br>
+      🔗 LinkedIn: <a href="www.linkedin.com/in/nihan-ali-vp-b902ab382" target="_blank">linkedin.com/in/yourlinkedin</a>
+    </p>
+  </section>
 
-          <div class="card fade-in delay-2" style="margin-top:14px; padding:14px;">
-            <h4 style="margin:0 0 6px 0">Quick Info</h4>
-            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)">
-              <div><strong>Location:</strong> Kerala, India</div>
-              <div><strong>Availability:</strong> Freelance / Full-time</div>
-              <div><strong>Resume:</strong> <a href="#" onclick="openResume()">Download</a></div>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- Skills -->
-      <section id="skills" style="margin-top:6px">
-        <div class="section-title">
-          <h3 style="margin:0">Skills</h3>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button class="btn ghost" onclick="filterSkills('All')">All</button>
-            <button class="btn ghost" onclick="filterSkills('Frontend')">Frontend</button>
-            <button class="btn ghost" onclick="filterSkills('Backend')">Backend</button>
-            <button class="btn ghost" onclick="filterSkills('Mobile')">Mobile</button>
-            <button class="btn ghost" onclick="filterSkills('Systems')">Systems</button>
-          </div>
-        </div>
-
-        <div class="skills-grid" id="skillsGrid">
-          <!-- Skill cards (JS populates) -->
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects" style="margin-top:22px">
-        <div class="section-title">
-          <h3 style="margin:0">Projects</h3>
-          <span style="color:var(--muted)">Hand-picked work</span>
-        </div>
-
-        <div class="projects">
-          <div class="card project fade-in">
-            <h4 style="margin:0">Workshop Management System</h4>
-            <p style="margin:8px 0 0 0;color:var(--muted)">Billing, inventory, salaries and warranty packages — Flutter + Firestore deployed on Web & Mobile.</p>
-            <div class="stacks">
-              <span class="chip">Flutter</span><span class="chip">Firestore</span><span class="chip">Cloud Functions</span>
-            </div>
-            <div style="margin-top:10px"><a class="btn" href="#">Open</a></div>
-          </div>
-
-          <div class="card project fade-in delay-1">
-            <h4 style="margin:0">Portfolio Generator</h4>
-            <p style="margin:8px 0 0 0;color:var(--muted)">One-file templates with dark mode, animated cards, and filters.</p>
-            <div class="stacks"><span class="chip">React</span><span class="chip">Tailwind</span></div>
-            <div style="margin-top:10px"><a class="btn" href="#">Open</a></div>
-          </div>
-
-          <div class="card project fade-in delay-2">
-            <h4 style="margin:0">Realtime Chat</h4>
-            <p style="margin:8px 0 0 0;color:var(--muted)">Minimal chat server with rooms and persisted history.</p>
-            <div class="stacks"><span class="chip">Node</span><span class="chip">Socket.IO</span></div>
-            <div style="margin-top:10px"><a class="btn" href="#">Open</a></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Certifications -->
-      <section id="certs" style="margin-top:22px">
-        <div class="section-title">
-          <h3 style="margin:0">Certifications</h3>
-          <div style="color:var(--muted)">Selected</div>
-        </div>
-
-        <div class="certs">
-          <div class="card cert fade-in">
-            <div>
-              <div style="font-weight:700">Google Cloud Digital Leader</div>
-              <div style="font-size:13px;color:var(--muted)">Issued 2024</div>
-            </div>
-            <div style="margin-left:auto"><a href="#" class="btn ghost">Verify</a></div>
-          </div>
-
-          <div class="card cert fade-in delay-1">
-            <div>
-              <div style="font-weight:700">Oracle Java SE 11</div>
-              <div style="font-size:13px;color:var(--muted)">Issued 2023</div>
-            </div>
-            <div style="margin-left:auto"><a href="#" class="btn ghost">Verify</a></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" style="margin-top:26px">
-        <div class="card">
-          <h3 style="margin:0 0 6px 0">Let’s work together</h3>
-          <p class="lead">Have an idea or an opening? I’m open to freelance and full-time roles. Drop a message and I’ll get back soon.</p>
-
-          <form id="contactForm" onsubmit="submitContact(event)">
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px">
-              <input type="text" id="name" placeholder="Your name" required />
-              <input type="email" id="email" placeholder="you@example.com" required />
-            </div>
-            <textarea id="message" placeholder="Tell me about your project or role" required></textarea>
-            <div style="display:flex;gap:8px;justify-content:flex-end">
-              <button type="submit" class="btn">Send Message</button>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <footer>
-        <p>© <span id="year"></span> Nihan Ali V P. Built with HTML, CSS & JavaScript.</p>
-      </footer>
-    </main>
-  </div>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Nihan Ali VP | All Rights Reserved</p>
+  </footer>
 
   <script>
-    // Basic data (edit as needed)
-    const PROFILE = {
-      name: "Nihan Ali V P",
-      email: "you@example.com",
-      github: "https://github.com/yourhandle",
-      linkedin: "https://linkedin.com/in/yourhandle",
-      resume: "#"
-    };
-
-    const SKILLS = [
-      { name: "CSS", level: 90, desc: "Tailwind, Flex/Grid, Animations", tag: "Frontend" },
-      { name: "Java", level: 80, desc: "Spring Boot, OOP, REST APIs", tag: "Backend" },
-      { name: "Python", level: 85, desc: "FastAPI, Pandas, Scripting", tag: "Backend" },
-      { name: "C++", level: 70, desc: "DSA, Performance-critical code", tag: "Systems" },
-      { name: "Dart", level: 75, desc: "Flutter apps for Web & Mobile", tag: "Mobile" },
-      { name: "JavaScript / TypeScript", level: 88, desc: "React, Node, Next.js", tag: "Full-stack" },
-      { name: "Firebase", level: 80, desc: "Auth, Firestore, Hosting", tag: "Cloud" },
-      { name: "SQL", level: 72, desc: "Postgres, Indexing, Joins", tag: "Data" }
-    ];
-
-    // Render skills
-    const skillsGrid = document.getElementById('skillsGrid');
-    function renderSkills(list) {
-      skillsGrid.innerHTML = '';
-      list.forEach((s, idx) => {
-        const el = document.createElement('div');
-        el.className = 'skill fade-in';
-        el.style.animationDelay = (idx * 0.04) + 's';
-        el.innerHTML = `
-          <div class="top">
-            <div style="display:flex;gap:10px;align-items:center">
-              <div style="width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-weight:700;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white">${s.name[0]}</div>
-              <div>
-                <h4>${s.name}</h4>
-                <div style="font-size:13px;color:var(--muted)">${s.desc}</div>
-              </div>
-            </div>
-            <div class="tag">${s.tag}</div>
-          </div>
-          <div class="progress"><i style="width:${s.level}%"></i></div>
-          <div style="text-align:right;margin-top:8px;font-size:13px;color:var(--muted)">${s.level}%</div>
-        `;
-        skillsGrid.appendChild(el);
-      });
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      const btn = document.querySelector('.toggle-btn');
+      btn.textContent = document.body.classList.contains('dark') ? "☀️" : "🌙";
     }
-    renderSkills(SKILLS);
-
-    // Filter skills
-    function filterSkills(tag) {
-      if(tag === 'All') renderSkills(SKILLS);
-      else renderSkills(SKILLS.filter(s => s.tag === tag));
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
     }
-
-    // Theme toggle (persist in localStorage)
-    const themeBtn = document.getElementById('themeToggle');
-    function setDark(on) {
-      const root = document.documentElement;
-      if(on) root.classList.add('dark'); else root.classList.remove('dark');
-      localStorage.setItem('dark', on ? '1' : '0');
-      themeBtn.textContent = on ? '☀️ Light' : '🌙 Dark';
-    }
-    themeBtn.addEventListener('click', ()=> setDark(!document.documentElement.classList.contains('dark')));
-    // initial
-    setDark(localStorage.getItem('dark') === '1' || window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches);
-
-    // Contact handling
-    function submitContact(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      // TODO: replace alert with API call to your backend or form service
-      alert(`Thanks ${name}! This demo form won't send anywhere yet. Replace submitContact() with a real API call.`);
-      e.target.reset();
-    }
-
-    // Links and resume
-    function openLink(url){ window.open(url, '_blank') }
-    function openResume(){ window.open(PROFILE.resume || '#', '_blank') }
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple keyboard accessibility: focus outlines
-    document.addEventListener('keyup', (e)=>{
-      if(e.key === 'Tab') document.body.style.outline = 'none';
-    });
   </script>
 </body>
 </html>
