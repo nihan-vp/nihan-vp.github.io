@@ -307,92 +307,81 @@
   </div>
 
   <script>
-    // Basic data (edit as needed)
-    const PROFILE = {
-      name: "Nihan Ali V P",
-      email: "qwerty311980@gmail.com",
-      github: "https://github.com/nihan-vp",
-      linkedin: "www.linkedin.com/in/nihan-ali-vp-b902ab382",
-      resume: "#"
-    };
+  // Basic data (edit as needed)
+  const PROFILE = {
+    name: "Nihan Ali V P",
+    email: "qwerty311980@gmail.com",
+    github: "https://github.com/nihan-vp",
+    linkedin: "www.linkedin.com/in/nihan-ali-vp-b902ab382",
+    resume: "#"
+  };
 
-    const SKILLS = [
-      { name: "CSS", level: 90, desc: "Tailwind, Flex/Grid, Animations", tag: "Frontend" },
-      { name: "Python", level: 85, desc: "FastAPI, Pandas, Scripting", tag: "Backend" },
-      { name: "C++", level: 65, desc: "DSA, Performance-critical code", tag: "Systems" },
-      { name: "Dart", level: 45, desc: "Flutter apps for Web & Mobile", tag: "Mobile" },
-      { name: "JavaScript / TypeScript", level: 88, desc: "React, Node, Next.js", tag: "Full-stack" },
-      { name: "Firebase", level: 80, desc: "Auth, Firestore, Hosting", tag: "Cloud" },
-    ];
+  const SKILLS = [
+    { name: "CSS", desc: "Tailwind, Flex/Grid, Animations", tag: "Frontend", icon: "devicon-css3-plain colored" },
+    { name: "Python", desc: "FastAPI, Pandas, Scripting", tag: "Backend", icon: "devicon-python-plain colored" },
+    { name: "C++", desc: "DSA, Performance-critical code", tag: "Systems", icon: "devicon-cplusplus-plain colored" },
+    { name: "Dart", desc: "Flutter apps for Web & Mobile", tag: "Mobile", icon: "devicon-dart-plain colored" },
+    { name: "JavaScript / TypeScript", desc: "React, Node, Next.js", tag: "Full-stack", icon: "devicon-typescript-plain colored" },
+    { name: "Firebase", desc: "Auth, Firestore, Hosting", tag: "Cloud", icon: "devicon-firebase-plain colored" },
+  ];
 
-
-    // Render skills
-    const skillsGrid = document.getElementById('skillsGrid');
-    function renderSkills(list) {
-      skillsGrid.innerHTML = '';
-      list.forEach((s, idx) => {
-        const el = document.createElement('div');
-        el.className = 'skill fade-in';
-        el.style.animationDelay = (idx * 0.04) + 's';
-        el.innerHTML = `
-          <div class="top">
-            <div style="display:flex;gap:10px;align-items:center">
-              <div style="width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-weight:700;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white">${s.name[0]}</div>
-              <div>
-                <h4>${s.name}</h4>
-                <div style="font-size:13px;color:var(--muted)">${s.desc}</div>
-              </div>
+  // Render skills
+  const skillsGrid = document.getElementById('skillsGrid');
+  function renderSkills(list) {
+    skillsGrid.innerHTML = '';
+    list.forEach((s, idx) => {
+      const el = document.createElement('div');
+      el.className = 'skill fade-in';
+      el.style.animationDelay = (idx * 0.04) + 's';
+      el.innerHTML = `
+        <div class="top">
+          <div style="display:flex;gap:10px;align-items:center">
+            <i class="${s.icon}" style="font-size:34px"></i>
+            <div>
+              <h4>${s.name}</h4>
+              <div style="font-size:13px;color:var(--muted)">${s.desc}</div>
             </div>
-            <div class="tag">${s.tag}</div>
           </div>
-          <div class="progress"><i style="width:${s.level}%"></i></div>
-          <div style="text-align:right;margin-top:8px;font-size:13px;color:var(--muted)">${s.level}%</div>
-        `;
-        skillsGrid.appendChild(el);
-      });
-    }
-    renderSkills(SKILLS);
-
-    // Filter skills
-    function filterSkills(tag) {
-      if(tag === 'All') renderSkills(SKILLS);
-      else renderSkills(SKILLS.filter(s => s.tag === tag));
-    }
-
-    // Theme toggle (persist in localStorage)
-    const themeBtn = document.getElementById('themeToggle');
-    function setDark(on) {
-      const root = document.documentElement;
-      if(on) root.classList.add('dark'); else root.classList.remove('dark');
-      localStorage.setItem('dark', on ? '1' : '0');
-      themeBtn.textContent = on ? '☀️ Light' : '🌙 Dark';
-    }
-    themeBtn.addEventListener('click', ()=> setDark(!document.documentElement.classList.contains('dark')));
-    // initial
-    setDark(localStorage.getItem('dark') === '1' || window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches);
-
-    // Contact handling
-    function submitContact(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      // TODO: replace alert with API call to your backend or form service
-      alert(`Thanks ${name}! This demo form won't send anywhere yet. Replace submitContact() with a real API call.`);
-      e.target.reset();
-    }
-
-    // Links and resume
-    function openLink(url){ window.open(url, '_blank') }
-    function openResume(){ window.open(PROFILE.resume || '#', '_blank') }
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple keyboard accessibility: focus outlines
-    document.addEventListener('keyup', (e)=>{
-      if(e.key === 'Tab') document.body.style.outline = 'none';
+          <div class="tag">${s.tag}</div>
+        </div>
+      `;
+      skillsGrid.appendChild(el);
     });
-  </script>
+  }
+  renderSkills(SKILLS);
+
+  // Filter skills
+  function filterSkills(tag) {
+    if(tag === 'All') renderSkills(SKILLS);
+    else renderSkills(SKILLS.filter(s => s.tag === tag));
+  }
+
+  // Theme toggle (persist in localStorage)
+  const themeBtn = document.getElementById('themeToggle');
+  function setDark(on) {
+    const root = document.documentElement;
+    if(on) root.classList.add('dark'); else root.classList.remove('dark');
+    localStorage.setItem('dark', on ? '1' : '0');
+    themeBtn.textContent = on ? '☀️ Light' : '🌙 Dark';
+  }
+  themeBtn.addEventListener('click', ()=> setDark(!document.documentElement.classList.contains('dark')));
+  setDark(localStorage.getItem('dark') === '1' || window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches);
+
+  // Contact handling
+  function submitContact(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    alert(`Thanks ${name}! This demo form won't send anywhere yet. Replace submitContact() with a real API call.`);
+    e.target.reset();
+  }
+
+  function openLink(url){ window.open(url, '_blank') }
+  function openResume(){ window.open(PROFILE.resume || '#', '_blank') }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
