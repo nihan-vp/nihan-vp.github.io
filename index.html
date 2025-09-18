@@ -193,7 +193,7 @@
               <div class="avatar card">
                 <div style="text-align:center;">
                   <div style="font-size:18px;font-weight:700">N A</div>
-                  <div style="font-size:12px;color:var(--muted);margin-top:6px">Full-Stack • React • Flutter</div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:6px">Full-Stack • Web • Flutter</div>
                 </div>
               </div>
               <div style="margin-top:12px;">
@@ -221,7 +221,7 @@
             <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted)">
               <div><strong>Location:</strong> Kerala, India</div>
               <div><strong>Availability:</strong> Freelance / Full-time</div>
-              <div><strong>Resume:</strong> <a href="#" onclick="openResume()">Download</a></div>
+              
             </div>
           </div>
         </aside>
@@ -316,16 +316,53 @@
       resume: "#"
     };
 
-    const SKILLS = [
-      { name: "CSS", level: 90, desc: "Tailwind, Flex/Grid, Animations", tag: "Frontend" },
-      { name: "Java", level: 80, desc: "Spring Boot, OOP, REST APIs", tag: "Backend" },
-      { name: "Python", level: 85, desc: "FastAPI, Pandas, Scripting", tag: "Backend" },
-      { name: "C++", level: 70, desc: "DSA, Performance-critical code", tag: "Systems" },
-      { name: "Dart", level: 75, desc: "Flutter apps for Web & Mobile", tag: "Mobile" },
-      { name: "JavaScript / TypeScript", level: 88, desc: "React, Node, Next.js", tag: "Full-stack" },
-      { name: "Firebase", level: 80, desc: "Auth, Firestore, Hosting", tag: "Cloud" },
-      { name: "SQL", level: 72, desc: "Postgres, Indexing, Joins", tag: "Data" }
-    ];
+    import "devicon/devicon.min.css";
+
+const SKILLS = [
+  { name: "CSS", desc: "Tailwind, Flex/Grid, Animations", tag: "Frontend", icon: "devicon-css3-plain colored" },
+  { name: "Python", desc: "FastAPI, Pandas, Scripting", tag: "Backend", icon: "devicon-python-plain colored" },
+  { name: "C++", desc: "DSA, Performance-critical code", tag: "Systems", icon: "devicon-cplusplus-plain colored" },
+  { name: "Dart", desc: "Flutter apps for Web & Mobile", tag: "Mobile", icon: "devicon-dart-plain colored" },
+  { name: "JavaScript / TypeScript", desc: "React, Node, Next.js", tag: "Full-stack", icon: "devicon-typescript-plain colored" },
+  { name: "Firebase", desc: "Auth, Firestore, Hosting", tag: "Cloud", icon: "devicon-firebase-plain colored" },
+];
+
+export default function Skills() {
+  // Group skills by tag
+  const grouped = SKILLS.reduce((acc, skill) => {
+    acc[skill.tag] = acc[skill.tag] || [];
+    acc[skill.tag].push(skill);
+    return acc;
+  }, {});
+
+  return (
+    <div className="p-6 space-y-10">
+      {Object.entries(grouped).map(([category, skills]) => (
+        <div key={category}>
+          <h2 className="text-2xl font-bold mb-4 text-indigo-600 dark:text-indigo-400">
+            {category}
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="bg-white dark:bg-gray-900 shadow-md rounded-2xl p-5 flex flex-col items-start hover:shadow-xl transition"
+              >
+                <div className="flex items-center gap-3">
+                  <i className={`${skill.icon} text-4xl`}></i>
+                  <h3 className="text-lg font-semibold">{skill.name}</h3>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {skill.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
     // Render skills
     const skillsGrid = document.getElementById('skillsGrid');
