@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  
   <!-- Title & Description -->
   <title>Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast</title>
   <meta name="description" content="Official portfolio of Nihan Ali VP — Full-Stack Developer skilled in Flutter, Firebase, Python, C++, Java, Dart & IoT. Explore my projects, skills, and contact details.">
@@ -11,7 +11,7 @@
   <meta name="author" content="Nihan Ali VP">
   <link rel="canonical" href="https://nihan-vp.me/">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nihan-vp.me/">
   <meta property="og:title" content="Nihan Ali VP | Full-Stack Developer">
@@ -30,72 +30,42 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
 
-  <!-- Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Nihan Ali VP",
-    "alternateName": "Nihan Ali",
-    "image": "https://nihan-vp.me/profile.png",
-    "url": "https://nihan-vp.me/",
-    "jobTitle": "Full-Stack Developer, IoT & AI Enthusiast",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelance / Independent"
-    },
-    "knowsAbout": [
-      "Flutter","Firebase","Python","C++","Dart","Java","IoT","AI","Web Development","Mobile Development"
-    ],
-    "sameAs": [
-      "https://github.com/nihan-vp",
-      "https://www.linkedin.com/in/nihan-ali-vp-b902ab382",
-      "https://twitter.com/nihan-vp",
-      "https://www.instagram.com/nihan_vp"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "IN"
+  <!-- Custom Common Styles -->
+  <style>
+    .classList {
+      @apply p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 transition 
+             hover:scale-105 hover:shadow-xl;
     }
-  }
-  </script>
+  </style>
 </head>
 <body class="bg-gradient-to-br from-blue-950 via-blue-950 to-blue-950 min-h-screen text-white">
 
 <!-- Header -->
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-xl border-b border-gray-200/50 dark:border-gray-700/50">
   <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
-    <!-- Logo + Name -->
     <div class="flex items-center group cursor-pointer">
-      <img src="briefcase.png" alt="Logo" class="w-12 h-12 rounded-xl border-2 border-blue-400 shadow-lg">
+      <img src="briefcase.png" alt="Logo of Nihan Ali VP" class="w-12 h-12 rounded-xl border-2 border-blue-400 shadow-lg">
       <div class="ml-4">
         <span class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">Nihan Ali VP</span>
         <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Full-Stack Developer</p>
       </div>
     </div>
-
-    <!-- Desktop Menu -->
     <div class="hidden md:flex items-center space-x-1">
-      <a href="#home" class="px-4 py-2 rounded-xl font-medium">🏠 Home</a>
-      <a href="#about" class="px-4 py-2 rounded-xl font-medium">👤 About</a>
-      <a href="#skills" class="px-4 py-2 rounded-xl font-medium">⚡ Skills</a>
-      <a href="#experience" class="px-4 py-2 rounded-xl font-medium">💼 Experience</a>
-      <a href="#github" class="px-4 py-2 rounded-xl font-medium">📊 GitHub</a>
-      <a href="#contact" class="px-4 py-2 rounded-xl font-medium">📧 Contact</a>
+      <a href="#home" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">🏠 Home</a>
+      <a href="#about" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">👤 About</a>
+      <a href="#skills" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">⚡ Skills</a>
+      <a href="#experience" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">💼 Experience</a>
+      <a href="#github" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">📊 GitHub</a>
+      <a href="#contact" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">📧 Contact</a>
     </div>
-
-    <!-- Dark Mode -->
     <button id="darkModeBtn" class="hidden md:block p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">🌙</button>
-
-    <!-- Mobile Menu Button -->
     <div class="md:hidden flex items-center">
       <button id="mobileMenuBtn" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">☰</button>
     </div>
   </nav>
-
-  <!-- Mobile Menu -->
-  <div id="mobileMenu" class="hidden bg-white dark:bg-gray-900 px-6 py-4">
+  <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 px-6 py-4">
     <a href="#home" class="block py-2">🏠 Home</a>
     <a href="#about" class="block py-2">👤 About</a>
     <a href="#skills" class="block py-2">⚡ Skills</a>
@@ -105,33 +75,37 @@
   </div>
 </header>
 
-<!-- Space for fixed header -->
+<!-- Space for header -->
 <div class="h-24" id="home"></div>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <section class="text-center py-20">
-  <img src="profile.png" alt="Profile" class="w-32 h-32 mx-auto rounded-full border-4 border-purple-400 shadow-lg mb-6">
+  <img src="profile.png" alt="Nihan Ali VP Profile Picture" class="w-32 h-32 mx-auto rounded-full border-4 border-purple-400 shadow-lg mb-6">
   <h1 class="text-4xl md:text-5xl font-bold mb-4">👋 Hi, I’m <span class="text-blue-400">Nihan Ali VP</span></h1>
   <p class="max-w-2xl mx-auto text-lg text-gray-200">Full-Stack Developer | IoT & Hardware Enthusiast | PCB Designer | Video Editor</p>
 </section>
 
 <!-- About -->
 <section id="about" class="container mx-auto px-6 py-16 text-center">
-  <h2 class="text-3xl md:text-4xl font-bold mb-6">👤 About Me</h2>
-  <p class="max-w-2xl mx-auto text-lg text-gray-200 leading-relaxed">
-    I’m Nihan Ali V P, a passionate Full-Stack Developer, Hardware Innovator, and Creative Technologist from India.
-    <br><br>
-    💡 My journey bridges software, electronics, and creativity — whether it’s designing apps with Flutter & Firebase, coding in Python, C++, Java, and Dart, building smart home automation systems, creating custom PCBs, or crafting videos that inspire.
-    <br><br>
-    🔧 What I Do Best:
-    <br>🚀 Full-Stack Development → Flutter, Firebase, Python, C++, Java, Dart
-    <br>⚡ Automation & IoT → Home Automation Systems, IT Projects
-    <br>🔩 Hardware Design → PCB Designing, Circuit Prototyping
-    <br>🎬 Creative Work → Professional Video Editing & Storytelling
-    <br><br>
-    🌍 My Mission:
-    To create solutions that are not just functional, but also innovative, user-friendly, and impactful — merging the best of software, hardware, and creativity to make technology truly human-centered.
-  </p>
+  <h2 class="text-3xl md:text-4xl font-bold mb-10">👤 About Me</h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md transition hover:scale-105 hover:shadow-xl">
+      <h3 class="text-xl font-semibold mb-3">💡 Who I Am</h3>
+      <p>I’m Nihan Ali V P, a passionate Full-Stack Developer, Hardware Innovator, and Creative Technologist from India.</p>
+    </div>
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md transition hover:scale-105 hover:shadow-xl">
+      <h3 class="text-xl font-semibold mb-3">🚀 What I Do</h3>
+      <p>Building apps with Flutter, Firebase, Python, C++, Java & Dart. Designing smart IoT systems, PCBs, and creating impactful videos.</p>
+    </div>
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md transition hover:scale-105 hover:shadow-xl">
+      <h3 class="text-xl font-semibold mb-3">🌍 My Mission</h3>
+      <p>To create solutions that are not just functional but also innovative, user-friendly, and impactful.</p>
+    </div>
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md transition hover:scale-105 hover:shadow-xl">
+      <h3 class="text-xl font-semibold mb-3">🔧 My Edge</h3>
+      <p>Blending software, hardware & creativity — making technology truly human-centered.</p>
+    </div>
+  </div>
 </section>
 
 <!-- Skills -->
@@ -141,27 +115,27 @@
   <!-- Programming -->
   <h3 class="text-2xl font-semibold mb-6 text-blue-300">💻 Programming</h3>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center border border-white/20 transition hover:scale-105 hover:shadow-xl">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="w-10 mb-3">
       Flutter
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center border border-white/20 transition hover:scale-105 hover:shadow-xl">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" class="w-10 mb-3">
       Firebase
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center border border-white/20 transition hover:scale-105 hover:shadow-xl">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-10 mb-3">
       Python
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center border border-white/20 transition hover:scale-105 hover:shadow-xl">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" class="w-10 mb-3">
       C++
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center border border-white/20 transition hover:scale-105 hover:shadow-xl">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="w-10 mb-3">
       HTML
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center border border-white/20 transition hover:scale-105 hover:shadow-xl">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" class="w-10 mb-3">
       Dart
     </div>
@@ -170,38 +144,50 @@
   <!-- IoT & Hardware -->
   <h3 class="text-2xl font-semibold mb-6 text-green-300">🔧 IoT & Hardware</h3>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
-      <img src="https://cdn-icons-png.flaticon.com/512/2813/2813190.png" alt="IoT" class="w-10 mb-3">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn-icons-png.flaticon.com/512/2813/2813190.png" alt="IoT Icon" class="w-10 mb-3">
       IoT Systems
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
-      <img src="https://cdn-icons-png.flaticon.com/512/621/621816.png" alt="PCB" class="w-10 mb-3">
-      PCB Design
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="IoT Icon" class="w-10 mb-3">
+      Arduino
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
-      <img src="https://cdn-icons-png.flaticon.com/512/1048/1048947.png" alt="Sensors" class="w-10 mb-3">
+    
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn-1.webcatalog.io/catalog/easyeda/easyeda-icon.png?v=1714774228381" alt="Premiere Pro Logo" class="w-10 mb-3">
+      Easy EDA
+    </div>
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn-icons-png.flaticon.com/512/1048/1048947.png" alt="Sensors Icon" class="w-10 mb-3">
       Sensors & Automation
     </div>
   </div>
 
-  <!-- Designing & Editing -->
+  <!-- Designing -->
   <h3 class="text-2xl font-semibold mb-6 text-pink-300">🎨 Designing & Editing</h3>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop" class="w-10 mb-3">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop Logo" class="w-10 mb-3">
       Photoshop
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" alt="Premiere Pro" class="w-10 mb-3">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" alt="Premiere Pro Logo" class="w-10 mb-3">
       Premiere Pro
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="Canva" class="w-10 mb-3">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/canva-icon.png" alt="Canva Logo" class="w-10 mb-3">
       Canva
+    </div>
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fusion/fusion-original.svg" alt="fusion" class="w-10 mb-3">
+      Fusion 360
+    </div>
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" alt="Premiere Pro Logo" class="w-10 mb-3">
+      Blender
     </div>
   </div>
 </section>
-
 <!-- GitHub Section -->
 <section id="github" class="container mx-auto px-6 py-16 text-center">
   <h2 class="text-3xl md:text-4xl font-bold mb-10">📊 GitHub Overview</h2>
@@ -229,12 +215,12 @@
 <section id="contact" class="container mx-auto px-6 py-16 text-center">
   <h2 class="text-3xl md:text-4xl font-bold mb-6">📧 Contact</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex items-center space-x-4">
-      <img src="https://cdn-icons-png.flaticon.com/512/159/159832.png" alt="Phone" class="w-8">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex items-center space-x-4 transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn-icons-png.flaticon.com/512/159/159832.png" alt="Phone Icon" class="w-8">
       <span class="text-lg">+91 7736708566</span>
     </div>
-    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex items-center space-x-4">
-      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email" class="w-8">
+    <div class="p-6 rounded-2xl bg-white/10 backdrop-blur-md flex items-center space-x-4 transition hover:scale-105 hover:shadow-xl">
+      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email Icon" class="w-8">
       <span class="text-lg">qwerty311980@gmail.com</span>
     </div>
   </div>
@@ -245,15 +231,12 @@
   © 2025 Nihan Ali VP. All Rights Reserved.
 </footer>
 
-<!-- Scripts -->
 <script>
   document.getElementById("darkModeBtn").addEventListener("click", () => {
     document.documentElement.classList.toggle("dark");
   });
-
   document.getElementById("mobileMenuBtn").addEventListener("click", () => {
-    const menu = document.getElementById("mobileMenu");
-    menu.classList.toggle("hidden");
+    document.getElementById("mobileMenu").classList.toggle("hidden");
   });
 </script>
 </body>
