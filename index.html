@@ -35,42 +35,42 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Nihan Ali VP",
-  "alternateName": "Nihan Ali",
-  "image": "https://nihan-vp.me/profile.png",
-  "url": "https://nihan-vp.me/",
-  "jobTitle": "Full-Stack Developer, IoT & AI Enthusiast",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Freelance / Independent"
-  },
-  "knowsAbout": [
-    "Flutter",
-    "Firebase",
-    "Python",
-    "C++",
-    "Dart",
-    "Java",
-    "IoT",
-    "AI",
-    "Web Development",
-    "Mobile Development"
-  ],
-  "sameAs": [
-    "https://github.com/nihan-vp",
-    "www.linkedin.com/in/nihan-ali-vp-b902ab382",
-    "https://twitter.com/nihan-vp",
-    "https://www.instagram.com/nihan_vp"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "IN"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "url": "https://nihan-vp.me",
+      "name": "Nihan Ali VP – Official Portfolio",
+      "alternateName": "Nihan Ali VP Portfolio",
+      "description": "Official portfolio of Nihan Ali VP — Full-Stack Developer, IoT & AI Enthusiast. Explore projects, skills, and contact information.",
+      "publisher": {
+        "@id": "https://nihan-vp.me/#about"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://nihan-vp.me/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://nihan-vp.me/#organization",
+      "name": "Nihan Ali VP",
+      "url": "https://nihan-vp.me",
+      "logo": "https://nihan-vp.me/briefcase.png",
+      "sameAs": [
+        "www.linkedin.com/in/nihan-ali-vp-b902ab382",
+        "https://github.com/nihan-vp",
+        "https://x.com/nihan_vp",
+        "https://www.instagram.com/nihan_vp"
+      ]
+    }
+  ]
 }
 </script>
+
   <!-- Custom Common Styles -->
   <style>
     .classList {
@@ -92,12 +92,12 @@
       </div>
     </div>
     <div class="hidden md:flex items-center space-x-1">
-      <a href="#home" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">🏠 Home</a>
-      <a href="#about" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">👤 About</a>
-      <a href="#skills" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">⚡ Skills</a>
-      <a href="#experience" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">💼 Experience</a>
-      <a href="#github" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">📊 GitHub</a>
-      <a href="#contact" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">📧 Contact</a>
+      <a href="#home" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">Home</a>
+      <a href="#about" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">About</a>
+      <a href="#skills" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">Skills</a>
+      <a href="#experience" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">Experience</a>
+      <a href="#github" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">GitHub</a>
+      <a href="#contact" class="px-4 py-2 rounded-xl font-medium hover:text-blue-400 transition">Contact</a>
     </div>
     <button id="darkModeBtn" class="hidden md:block p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">🌙</button>
     <div class="md:hidden flex items-center">
@@ -105,12 +105,12 @@
     </div>
   </nav>
   <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 px-6 py-4">
-    <a href="#home" class="block py-2">🏠 Home</a>
-    <a href="#about" class="block py-2">👤 About</a>
-    <a href="#skills" class="block py-2">⚡ Skills</a>
-    <a href="#experience" class="block py-2">💼 Experience</a>
-    <a href="#github" class="block py-2">📊 GitHub</a>
-    <a href="#contact" class="block py-2">📧 Contact</a>
+    <a href="#home" class="block py-2">Home</a>
+    <a href="#about" class="block py-2">About</a>
+    <a href="#skills" class="block py-2">Skills</a>
+    <a href="#experience" class="block py-2">Experience</a>
+    <a href="#github" class="block py-2">GitHub</a>
+    <a href="#contact" class="block py-2">Contact</a>
   </div>
 </header>
 
