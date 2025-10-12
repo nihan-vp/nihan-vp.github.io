@@ -2,7 +2,6 @@
 import React from 'react';
 import type { SkillCategory, Project } from './types';
 import { SiTypescript, SiJavascript, SiPython, SiCplusplus, SiHtml5, SiCss3, SiReact, SiNodedotjs, SiExpress, SiMongodb, SiPostgresql, SiDocker, SiGit, SiArduino, SiRaspberrypi, SiNextdotjs, SiTailwindcss, SiVercel, SiLinux } from 'react-icons/si';
-import { profile } from 'console';
 
 export const PERSONAL_INFO = {
   name: "Nihan Ali",
@@ -12,7 +11,6 @@ export const PERSONAL_INFO = {
     github: "https://github.com/nihan-vp",
     linkedin: "https://in.linkedin.com/in/nihan-ali-vp-b902ab382",
     twitter: "https://twitter.com",
-    profile: "assets/profile.png"
   },
   email: "qwerty311980@gmail.com"
 };
