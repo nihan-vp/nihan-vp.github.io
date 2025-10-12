@@ -6,28 +6,28 @@ on:
       - main  # or "master" if that’s your default branch
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: write  # to upload the build artifact
+  pages: write  # to deploy to GitHub Pages                   
+  id-token: write # to authenticate with GitHub Pages
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build:                            
+    runs-on: ubuntu-latest                      
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout code             
+        uses: actions/checkout@v4           
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js       
+        uses: actions/setup-node@v4   
         with:
-          node-version: 20
+          node-version: 20    
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies  
+        run: npm ci 
 
-      - name: Build the project
-        run: npm run build
+      - name: Build the project  
+        run: npm run build #
 
       - name: Upload production-ready build files
         uses: actions/upload-pages-artifact@v3

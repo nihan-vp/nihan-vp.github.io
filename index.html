@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <!-- Title & Description -->
   <title>Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast</title>
   <meta name="description" content="Official portfolio of Nihan Ali VP — Full-Stack Developer skilled in Flutter, Firebase, Python, C++, Java, Dart & IoT. Explore my projects, skills, and contact details.">
@@ -16,16 +16,17 @@
   <meta property="og:url" content="https://nihan-vp.me/">
   <meta property="og:title" content="Nihan Ali VP | Full-Stack Developer">
   <meta property="og:description" content="Discover the official portfolio of Nihan Ali VP — Full-Stack Developer & IoT enthusiast skilled in Flutter, Firebase, Python, and C++.">
-  <meta property="og:image" content="https://nihan-vp.me/profile.png">
+  <meta property="og:image" content="https://nihan-vp.me/profile.jpg">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://nihan-vp.me/">
   <meta name="twitter:title" content="Nihan Ali VP | Full-Stack Developer">
   <meta name="twitter:description" content="Portfolio of Nihan Ali VP — Full-Stack Developer skilled in Flutter, Firebase, Python, C++, and IoT.">
-  <meta name="twitter:image" content="https://nihan-vp.me/profile.png">
+  <meta name="twitter:image" content="https://nihan-vp.me/profile.jpg">
 
-  <link rel="me" href="www.linkedin.com/in/nihan-ali-vp-b902ab382" />
+  <!-- Social Links -->
+  <link rel="me" href="https://www.linkedin.com/in/nihan-ali-vp-b902ab382" />
   <link rel="me" href="https://github.com/nihan-vp" />
 
   <!-- Favicon -->
@@ -33,135 +34,133 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/index.css">
+
+  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://nihan-vp.me/#About",
-      "name": "Nihan Ali VP",
-      "alternateName": "Nihan Ali",
-      "image": "https://nihan-vp.me/profile.png",
-      "url": "https://nihan-vp.me/",
-      "jobTitle": "Full-Stack Developer, IoT & AI Enthusiast",
-      "worksFor": {
-        "@id": "https://nihan-vp.me/#organization"
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://nihan-vp.me/#About",
+        "name": "Nihan Ali VP",
+        "alternateName": "Nihan Ali",
+        "image": "https://nihan-vp.me/profile.png",
+        "url": "https://nihan-vp.me/",
+        "jobTitle": "Full-Stack Developer, IoT & AI Enthusiast",
+        "worksFor": { "@id": "https://nihan-vp.me/#organization" },
+        "knowsAbout": [
+          "Flutter",
+          "Firebase",
+          "AppWrite",
+          "Python",
+          "C++",
+          "Dart",
+          "HTML",
+          "CSS",
+          "IoT",
+          "AI",
+          "Web Development",
+          "Mobile Development"
+        ],
+        "sameAs": [
+          "https://github.com/nihan-vp",
+          "https://www.linkedin.com/in/nihan-ali-vp-b902ab382",
+          "https://x.com/nihan_vp",
+          "https://www.instagram.com/nihan_vp"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "IN"
+        }
       },
-      "knowsAbout": [
-        "Flutter",
-        "Firebase",
-        "AppWrite",
-        "Python",
-        "C++",
-        "Dart",
-        "HTML"
-        "CSS",
-        "IoT",
-        "AI",
-        "Web Development",
-        "Mobile Development"
-      ],
-      "sameAs": [
-        "https://github.com/nihan-vp",
-        "www.linkedin.com/in/nihan-ali-vp-b902ab382",
-        "https://x.com/nihan_vp",
-        "https://www.instagram.com/nihan_vp"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "IN"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://nihan-vp.me/#website",
-      "url": "https://nihan-vp.me",
-      "name": "Nihan Ali VP – Official Portfolio",
-      "alternateName": "Nihan Ali VP Portfolio",
-      "description": "Official portfolio of Nihan Ali VP — Full-Stack Developer, IoT & AI Enthusiast. Explore projects, skills, and contact information.",
-      "publisher": {
-        "@id": "https://nihan-vp.me/#organization"
+      {
+        "@type": "WebSite",
+        "@id": "https://nihan-vp.me/#website",
+        "url": "https://nihan-vp.me",
+        "name": "Nihan Ali VP – Official Portfolio",
+        "alternateName": "Nihan Ali VP Portfolio",
+        "description": "Official portfolio of Nihan Ali VP — Full-Stack Developer, IoT & AI Enthusiast. Explore projects, skills, and contact information.",
+        "publisher": { "@id": "https://nihan-vp.me/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://nihan-vp.me/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://nihan-vp.me/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+      {
+        "@type": "Organization",
+        "@id": "https://nihan-vp.me/#organization",
+        "name": "Nihan Ali VP",
+        "url": "https://nihan-vp.me",
+        "logo": "https://nihan-vp.me/briefcase.png",
+        "sameAs": [
+          "https://github.com/nihan-vp",
+          "https://www.linkedin.com/in/nihan-ali-vp-b902ab382",
+          "https://x.com/nihan_vp",
+          "https://www.instagram.com/nihan_vp"
+        ]
       }
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://nihan-vp.me/#organization",
-      "name": "Nihan Ali VP",
-      "url": "https://nihan-vp.me",
-      "logo": "https://nihan-vp.me/briefcase.png",
-      "sameAs": [
-        "https://github.com/nihan-vp",
-        "www.linkedin.com/in/nihan-ali-vp-b902ab382",
-        "https://x.com/nihan_vp",
-        "https://www.instagram.com/nihan_vp"
-      ]
-    }
-  ]
-}
-</script>
-
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Full-Stack Developer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #0a0a0a;
-        color: #e5e7eb;
-      }
-      .gradient-text {
-        background: linear-gradient(90deg, #4f46e5, #ec4899);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .animated-gradient-bg {
-        background-size: 200% 200%;
-        animation: gradient-animation 10s ease infinite;
-      }
-       @keyframes gradient-animation {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-    </style>
-  <script>
-      // Polyfill process.env for browser environment. The @google/genai SDK expects this to exist.
-      if (typeof window.process === 'undefined') {
-        window.process = { env: {} };
-      }
-  </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-icons/": "https://aistudiocdn.com/react-icons@^5.5.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^0.20.0"
+    ]
   }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
-</html>
+  </script>
 
+  <!-- Global Styles -->
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0a0a0a;
+      color: #e5e7eb;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .animated-gradient-bg {
+      background-size: 200% 200%;
+      animation: gradient-animation 10s ease infinite;
+    }
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+
+  <!-- Polyfill for process.env (for @google/genai) -->
+  <script>
+    if (typeof window.process === 'undefined') {
+      window.process = { env: {} };
+    }
+  </script>
+
+  <!-- Import Map for React & GenAI -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+      "react-icons/": "https://aistudiocdn.com/react-icons@^5.5.0",
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^0.20.0"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- Your compiled JS bundle (replace index.js with your build output) -->
+  <script type="module" src="/index.js"></script>
+</body>
+</html>
