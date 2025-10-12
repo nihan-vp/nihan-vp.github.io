@@ -1,7 +1,7 @@
 
 import React from 'react';
 import AnimatedSection from './AnimatedSection';
-
+import profile from '../assets/profile.jpg';
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <h2 className="text-4xl font-bold text-center mb-12 gradient-text">{children}</h2>
 );
@@ -14,8 +14,8 @@ const About: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/3">
             <img 
-              src="https://picsum.photos/seed/profile/400/400" 
-              alt="Alex Doe" 
+              src={profile}
+              alt="Profile" 
               className="rounded-full shadow-lg border-4 border-gray-700 mx-auto"
             />
           </div>
