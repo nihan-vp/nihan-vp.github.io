@@ -34,24 +34,9 @@
         100% { background-position: 0% 50%; }
       }
     </style>
-  <script>
-      // Polyfill process.env for browser environment. The @google/genai SDK expects this to exist.
-      if (typeof window.process === 'undefined') {
-        window.process = { env: {} };
-      }
-  </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-icons/": "https://aistudiocdn.com/react-icons@^5.5.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^0.20.0"
-  }
-}
+
+  
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
