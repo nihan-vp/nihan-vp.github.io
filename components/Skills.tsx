@@ -26,7 +26,7 @@ const Skills: React.FC = () => {
         { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
         { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
         { name: "Bootstrap", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
-        { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },       
+        { name: "Tailwind CSS", logo: "https://res.cloudinary.com/dfg2erf3z/image/upload/v1760345760/3920388-middle-removebg-preview_qsjshz.png" },       
       ]
     },
     {
@@ -58,7 +58,7 @@ const Skills: React.FC = () => {
         { name: "Raspberry Pi", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" },
         { name: "Arduino", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" },
         { name: "Ubiquiti", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Ubiquiti_Logo_2023.svg" },
-        { name: "ESP32", logo: "https://raw.githubusercontent.com/esp-idf/esp-idf/master/docs/_static/esp-idf-logo.png" },
+        { name: "ESP32", logo: "https://res.cloudinary.com/dfg2erf3z/image/upload/v1760345819/png-transparent-espressif-systems-hd-logo-removebg-preview_moi0id.png" },
         { name: "Home Assistant", logo: "https://www.home-assistant.io/images/favicon-192x192.png" }
       ]
     },
