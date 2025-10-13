@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: '/', // 👈 Important for username.github.io (this fixes blank page issue)
+    base: '/nihan-vp.github.io', // 👈 Important for username.github.io (this fixes blank page issue)
     server: {
       port: 3000,
       host: '0.0.0.0',
@@ -22,4 +22,3 @@ export default defineConfig(({ mode }) => {
     },
   };
 });
-                  
