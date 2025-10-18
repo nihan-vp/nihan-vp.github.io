@@ -28,29 +28,78 @@
   <meta name="twitter:creator" content="@nihan_vp" />
 
   <!-- Structured Data (Google + AI Indexing) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Nihan Ali VP",
-    "url": "https://nihan-vp.me",
-    "image": "https://nihan-vp.me/profile.jpg",
-    "jobTitle": "Full-Stack Developer",
-    "description": "Nihan Ali VP — Full-Stack Developer specializing in React, Node.js, MongoDB, IoT, and AI. Building innovative web and AI-integrated applications.",
-    "sameAs": [
-      "https://github.com/nihan-vp",
-      "https://in.linkedin.com/in/nihan-ali-vp-b902ab382",
-      "https://twitter.com/nihan_vp",
-      "https://www.instagram.com/nihan_vp/",
-      "https://nihan-vp.me"
-    ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelance / Self-Employed"
+  <!-- ✅ Structured Data: Person + Website -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nihan-vp.me/#person",
+      "name": "Nihan Ali VP",
+      "url": "https://nihan-vp.me",
+      "image": "https://nihan-vp.me/profile.jpg",
+      "description": "Official portfolio of Nihan Ali VP — Full-Stack Developer skilled in React, Node.js, MongoDB, IoT, and AI projects.",
+      "jobTitle": "Full-Stack Developer, IoT & AI Enthusiast",
+      "sameAs": [
+        "https://github.com/nihan-vp",
+        "https://www.linkedin.com/in/nihan-ali-vp-b902ab382/",
+        "https://twitter.com/nihan_vp",
+        "https://www.instagram.com/nihan_vp/"
+      ],
+      "knowsAbout": [
+        "Web Development",
+        "React",
+        "Node.js",
+        "MongoDB",
+        "IoT",
+        "Artificial Intelligence",
+        "Full Stack Development"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Calicut University"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance / Self-Employed"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      }
     },
-    "knowsAbout": ["React", "Node.js", "MongoDB", "IoT", "AI", "Web Development", "JavaScript", "UI/UX"]
-  }
-  </script>
+    {
+      "@type": "WebSite",
+      "@id": "https://nihan-vp.me/#website",
+      "url": "https://nihan-vp.me",
+      "name": "Nihan Ali VP Portfolio",
+      "alternateName": "Nihan VP | Full-Stack Developer",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://nihan-vp.me/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@id": "https://nihan-vp.me/#person"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://nihan-vp.me/#webpage",
+      "url": "https://nihan-vp.me",
+      "name": "Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast",
+      "description": "Explore the portfolio, skills, and projects of Nihan Ali VP, a passionate Full-Stack Developer, IoT and AI enthusiast.",
+      "isPartOf": { "@id": "https://nihan-vp.me/#website" },
+      "about": { "@id": "https://nihan-vp.me/#person" },
+      "datePublished": "2024-01-01",
+      "dateModified": "2025-10-18",
+      "inLanguage": "en"
+    }
+  ]
+}
+</script>
+
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/briefcase-CBlQRsIR.png" />
