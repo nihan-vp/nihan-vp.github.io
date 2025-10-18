@@ -3,104 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
+  <!-- Title & Description -->
   <title>Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast</title>
   <meta name="description" content="Official portfolio of Nihan Ali VP — Full-Stack Developer with expertise in React, Node.js, MongoDB, IoT, and AI projects. Explore my skills, projects, and contact information.">
+  <meta name="keywords" content="Nihan Ali VP, Full-Stack Developer, React Developer, Node.js, MongoDB, IoT, AI, Portfolio, Software Engineer, Developer Portfolio">
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://nihan-vp.me">
+  <link rel="canonical" href="https://nihan-vp.me" />
 
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="Nihan Ali VP | Full-Stack Developer" />
-  <meta property="og:description" content="Explore the projects, skills, and portfolio of Nihan Ali VP, a Full-Stack Developer and tech enthusiast." />
+  <!-- Open Graph (Facebook, LinkedIn, AI) -->
+  <meta property="og:title" content="Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast" />
+  <meta property="og:description" content="Explore the portfolio, skills, and projects of Nihan Ali VP — Full-Stack Developer and tech innovator." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://nihan-vp.me" />
   <meta property="og:image" content="https://nihan-vp.me/profile.jpg" />
+  <meta property="og:site_name" content="Nihan Ali VP Portfolio" />
 
-  <!-- Twitter Card -->
+  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Nihan Ali VP | Full-Stack Developer" />
-  <meta name="twitter:description" content="Explore the projects, skills, and portfolio of Nihan Ali VP, a Full-Stack Developer and tech enthusiast." />
+  <meta name="twitter:description" content="Explore the portfolio, skills, and projects of Nihan Ali VP, a Full-Stack Developer and AI enthusiast." />
   <meta name="twitter:image" content="https://nihan-vp.me/profile.jpg" />
+  <meta name="twitter:creator" content="@nihan_vp" />
 
-  <!-- Structured Data (JSON-LD for Google Rich Snippets) -->
+  <!-- Structured Data (Google + AI Indexing) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Nihan Ali VP",
     "url": "https://nihan-vp.me",
+    "image": "https://nihan-vp.me/profile.jpg",
+    "jobTitle": "Full-Stack Developer",
+    "description": "Nihan Ali VP — Full-Stack Developer specializing in React, Node.js, MongoDB, IoT, and AI. Building innovative web and AI-integrated applications.",
     "sameAs": [
       "https://github.com/nihan-vp",
       "https://in.linkedin.com/in/nihan-ali-vp-b902ab382",
-      "https://twitter.com/nihan-vp",
-      "https://www.instagram.com/nihan_vp/"
+      "https://twitter.com/nihan_vp",
+      "https://www.instagram.com/nihan_vp/",
+      "https://nihan-vp.me"
     ],
-    "jobTitle": "Full-Stack Developer",
-    "image": "https://nihan-vp.me/profile.jpg",
     "worksFor": {
       "@type": "Organization",
       "name": "Freelance / Self-Employed"
+    },
+    "knowsAbout": ["React", "Node.js", "MongoDB", "IoT", "AI", "Web Development", "JavaScript", "UI/UX"]
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/briefcase-CBlQRsIR.png" />
+
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0a0a0a;
+      color: #e5e7eb;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .animated-gradient-bg {
+      background-size: 200% 200%;
+      animation: gradient-animation 10s ease infinite;
+    }
+    @keyframes gradient-animation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+
+  <!-- Polyfill (for GenAI SDK) -->
+  <script>
+    if (typeof window.process === 'undefined') {
+      window.process = { env: {} };
+    }
+  </script>
+
+  <link rel="stylesheet" href="/index.css" />
+
+  <!-- Import Map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/",
+      "react-icons/": "https://aistudiocdn.com/react-icons@^5.5.0/",
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^0.20.0"
     }
   }
   </script>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/briefcase-CBlQRsIR.png">
 
-  <!-- Tailwind CSS & Google Fonts -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #0a0a0a;
-        color: #e5e7eb;
-      }
-      .gradient-text {
-        background: linear-gradient(90deg, #4f46e5, #ec4899);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .animated-gradient-bg {
-        background-size: 200% 200%;
-        animation: gradient-animation 10s ease infinite;
-      }
-       @keyframes gradient-animation {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-    </style>
-  <script>
-      // Polyfill process.env for browser environment. The @google/genai SDK expects this to exist.
-      if (typeof window.process === 'undefined') {
-        window.process = { env: {} };
-      }
-  </script>
-
-<link rel="stylesheet" href="/index.css">
-
-
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-icons/": "https://aistudiocdn.com/react-icons@^5.5.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^0.20.0"
-  }
-}
-</script>
+  <!-- Your React App Bundle -->
   <script type="module" crossorigin src="/assets/index-Dul3tngH.js"></script>
 </head>
-  <body>
-    <div id="root"></div>
 
-  </body>
+<body>
+  <div id="root"></div>
+</body>
 </html>
