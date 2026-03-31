@@ -1,5 +1,6 @@
 import React from 'react';
 import { PERSONAL_INFO } from '../constants';
+import AnimatedSection from './AnimatedSection';
 
 const Skills: React.FC = () => {
   const isDark = true; // The portfolio is dark-themed

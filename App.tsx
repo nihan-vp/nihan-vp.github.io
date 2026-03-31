@@ -59,7 +59,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#0a0a0a] text-gray-200 min-h-screen overflow-x-hidden">
+    <div className="bg-[#050505] text-gray-200 min-h-screen overflow-x-hidden relative">
+      {/* 🔹 Background Glowing Orbs */}
+      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px] pointer-events-none z-0"></div>
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-pink-600/10 blur-[120px] pointer-events-none z-0"></div>
+      <div className="fixed top-[40%] left-[50%] transform -translate-x-1/2 w-[60%] h-[60%] rounded-full bg-purple-600/5 blur-[150px] pointer-events-none z-0"></div>
+
       <Helmet>
         {/* 🔹 Basic SEO */}
         <title>Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast</title>
@@ -101,15 +106,15 @@ const App: React.FC = () => {
 
       {/* 🔹 Mouse Effect */}
       <div
-        className="hidden lg:block pointer-events-none fixed inset-0 z-50 transition duration-300"
+        className="hidden lg:block pointer-events-none fixed inset-0 z-40 transition duration-300"
         style={{
-          background: `radial-gradient(600px at ${cursorPos.x}px ${cursorPos.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
+          background: `radial-gradient(600px at ${cursorPos.x}px ${cursorPos.y}px, rgba(99, 102, 241, 0.1), transparent 80%)`,
         }}
       />
 
       {/* 🔹 Page Content */}
       <Header />
-      <main className="container mx-auto px-6 md:px-12 lg:px-24">
+      <main className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         <Hero />
         <About />
         <Skills />
