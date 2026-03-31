@@ -1,27 +1,23 @@
-
 import React, { ReactNode } from 'react';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { motion } from 'framer-motion';
 
 interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
+  delay?: number;
 }
 
-const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className = '' }) => {
-  const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({
-    threshold: 0.1,
-    triggerOnce: true
-  });
-
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className = '', delay = 0 }) => {
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-1000 ease-out ${className} ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: "easeOut", delay }}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
