@@ -4,23 +4,36 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
-import GitHub from './components/GitHub';
+import ProductsSection from './components/ProductsSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Chatbot from './components/Chatbot';
 import { Helmet } from 'react-helmet-async';
 
 const App: React.FC = () => {
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
     };
+
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      setScrollProgress(progress);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  // ✅ JSON-LD: Structured data for SEO + AI recognition
+  // Structured data for SEO + AI recognition
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -37,15 +50,8 @@ const App: React.FC = () => {
       "https://nihan-vp.me"
     ],
     "knowsAbout": [
-      "React",
-      "Node.js",
-      "MongoDB",
-      "JavaScript",
-      "IoT",
-      "AI",
-      "Web Development",
-      "API Integration",
-      "UI/UX Design"
+      "React", "Node.js", "MongoDB", "JavaScript", "IoT", "AI",
+      "Web Development", "API Integration", "UI/UX Design"
     ],
     "worksFor": {
       "@type": "Organization",
@@ -59,14 +65,24 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#050505] text-gray-200 min-h-screen overflow-x-hidden relative">
-      {/* 🔹 Background Glowing Orbs */}
-      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px] pointer-events-none z-0"></div>
-      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-pink-600/10 blur-[120px] pointer-events-none z-0"></div>
-      <div className="fixed top-[40%] left-[50%] transform -translate-x-1/2 w-[60%] h-[60%] rounded-full bg-purple-600/5 blur-[150px] pointer-events-none z-0"></div>
+    <div className="bg-[#0a0e17] text-gray-200 min-h-screen overflow-x-hidden relative">
+      {/* Scroll Progress Bar */}
+      <div 
+        className="scroll-progress" 
+        style={{ transform: `scaleX(${scrollProgress / 100})` }} 
+      />
+
+      {/* Aurora Ambient Backgrounds */}
+      <div className="aurora-container">
+        <div className="aurora-mesh aurora-1" />
+        <div className="aurora-mesh aurora-2" />
+        <div className="aurora-mesh aurora-3" />
+      </div>
+
+      {/* Grid Overlay */}
+      <div className="grid-overlay" />
 
       <Helmet>
-        {/* 🔹 Basic SEO */}
         <title>Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast</title>
         <meta
           name="description"
@@ -76,8 +92,6 @@ const App: React.FC = () => {
           name="keywords"
           content="Nihan Ali VP, Full-Stack Developer, React, Node.js, MongoDB, IoT, AI, Developer Portfolio, Web Developer India"
         />
-
-        {/* 🔹 Open Graph for Social & AI */}
         <meta property="og:title" content="Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast" />
         <meta
           property="og:description"
@@ -87,8 +101,6 @@ const App: React.FC = () => {
         <meta property="og:url" content="https://nihan-vp.me" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Nihan Ali VP Portfolio" />
-
-        {/* 🔹 Twitter / X */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Nihan Ali VP | Full-Stack Developer" />
         <meta
@@ -96,33 +108,30 @@ const App: React.FC = () => {
           content="Explore the portfolio and skills of Nihan Ali VP — Full-Stack Developer and AI Enthusiast."
         />
         <meta name="twitter:image" content="https://nihan-vp.me/profile.jpg" />
-
-        {/* 🔹 Structured Data for AI and Search Engines */}
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-
-        {/* 🔹 Canonical URL */}
         <link rel="canonical" href="https://nihan-vp.me" />
       </Helmet>
 
-      {/* 🔹 Mouse Effect */}
+      {/* Mouse glow follower */}
       <div
-        className="hidden lg:block pointer-events-none fixed inset-0 z-40 transition duration-300"
+        className="hidden lg:block pointer-events-none fixed inset-0 z-40 transition duration-150"
         style={{
-          background: `radial-gradient(600px at ${cursorPos.x}px ${cursorPos.y}px, rgba(99, 102, 241, 0.1), transparent 80%)`,
+          background: `radial-gradient(500px at ${cursorPos.x}px ${cursorPos.y}px, rgba(6, 182, 212, 0.05), transparent 80%)`,
         }}
       />
 
-      {/* 🔹 Page Content */}
+      {/* Page content */}
       <Header />
       <main className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         <Hero />
         <About />
         <Skills />
         <Projects />
-        <GitHub />
+        <ProductsSection />
         <Contact />
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 };

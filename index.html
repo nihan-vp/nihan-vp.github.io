@@ -108,31 +108,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #0a0a0a;
-      color: #e5e7eb;
-    }
-    .gradient-text {
-      background: linear-gradient(90deg, #4f46e5, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .animated-gradient-bg {
-      background-size: 200% 200%;
-      animation: gradient-animation 10s ease infinite;
-    }
-    @keyframes gradient-animation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', 'Space Grotesk', system-ui, sans-serif; background-color: #050505; color: #f3f4f6; }
   </style>
 
   <!-- Polyfill (for GenAI SDK) -->
@@ -144,21 +124,8 @@
 
   <link rel="stylesheet" href="/index.css" />
 
-  <!-- Import Map -->
-  <script type="importmap">
-  {
-    "imports": {
-      "react": "https://aistudiocdn.com/react@^19.2.0",
-      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-      "react/": "https://aistudiocdn.com/react@^19.2.0/",
-      "react-icons/": "https://aistudiocdn.com/react-icons@^5.5.0/",
-      "@google/genai": "https://aistudiocdn.com/@google/genai@^0.20.0"
-    }
-  }
-  </script>
-
-  <!-- Your React App Bundle -->
-  <script type="module" crossorigin src="/assets/index-Dul3tngH.js"></script>
+  <!-- Vite Entry Point -->
+  <script type="module" src="/index.tsx"></script>
 </head>
 
 <body>

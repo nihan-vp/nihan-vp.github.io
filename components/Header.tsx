@@ -1,104 +1,155 @@
 import React, { useState, useEffect } from 'react';
 import { PERSONAL_INFO } from '../constants';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
+
+      const sections = ['home', 'about', 'skills', 'projects', 'products', 'contact'];
+      let currentSection = 'home';
+      
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 160 && rect.bottom >= 160) {
+            currentSection = section;
+            break;
+          }
+        }
+      }
+      setActiveSection(currentSection);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.body.style.overflow = menuOpen ? 'hidden' : 'unset';
   }, [menuOpen]);
 
   const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#github', label: 'GitHub' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#about', label: 'About', id: 'about' },
+    { href: '#skills', label: 'Skills', id: 'skills' },
+    { href: '#projects', label: 'Projects', id: 'projects' },
+    { href: '#products', label: 'Products', id: 'products' },
+    { href: '#contact', label: 'Contact', id: 'contact' },
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
-      document.querySelector(href)?.scrollIntoView({
-          behavior: 'smooth'
-      });
-      setMenuOpen(false);
-  }
+    e.preventDefault();
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
+  };
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent ${
-          isScrolled ? 'bg-[#050505]/80 backdrop-blur-md shadow-lg border-white/10 py-2' : 'bg-transparent py-4'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 w-full px-6`}
       >
-        <div className="container mx-auto px-6 md:px-12 lg:px-24 flex justify-between items-center">
-          <a href="#" onClick={(e) => handleScrollTo(e, '#root')} className="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity">
+        <div className={`container flex justify-between items-center max-w-5xl transition-all duration-300 ${
+          isScrolled 
+            ? 'pill-navbar shadow-2xl shadow-black/40 mt-4' 
+            : 'bg-transparent border-transparent py-6 mt-0'
+        }`}>
+          {/* Logo */}
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setMenuOpen(false);
+            }}
+            className="text-xl font-bold font-heading gradient-text-shimmer hover:opacity-80 transition-opacity"
+          >
             {PERSONAL_INFO.name.split(' ')[0]}
+            <span className="text-[hsl(var(--color-cyan-base))]">.</span>
           </a>
-          <nav className="hidden md:flex items-center space-x-8">
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleScrollTo(e, link.href)}
-                className="text-sm font-medium text-gray-300 hover:text-indigo-400 transition-colors duration-300"
+                className={`text-sm font-medium transition-all duration-300 hover:text-[hsl(var(--color-cyan-base))] relative py-1.5 ${
+                  activeSection === link.id ? 'text-[hsl(var(--color-cyan-base))]' : 'text-gray-400'
+                }`}
               >
                 {link.label}
+                {activeSection === link.id && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-gradient-to-r from-[hsl(var(--color-emerald-base))] to-[hsl(var(--color-cyan-base))]" />
+                )}
               </a>
             ))}
           </nav>
-          <a 
+
+          {/* CTA */}
+          <a
             href="#contact"
             onClick={(e) => handleScrollTo(e, '#contact')}
-            className="hidden md:inline-block px-6 py-2.5 text-sm font-semibold text-white bg-indigo-600/10 border border-indigo-500/50 rounded-full hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300 shadow-[0_0_15px_rgba(79,70,229,0.1)] hover:shadow-[0_0_20px_rgba(79,70,229,0.3)] transform hover:-translate-y-0.5"
+            className="hidden md:inline-flex items-center px-4 py-1.5 text-xs font-semibold text-black rounded-full transition-all duration-300 bg-gradient-to-r from-[hsl(var(--color-emerald-base))] to-[hsl(var(--color-cyan-base))] hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:scale-105"
           >
-            Hire Me
+            <span>Let's talk</span>
           </a>
-          <button 
-            className="md:hidden text-2xl z-50"
+
+          {/* Mobile toggle */}
+          <button
+            className="md:hidden text-gray-300 z-50 p-2 rounded-lg hover:bg-white/5 transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            {menuOpen ? <FaTimes /> : <FaBars />}
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </header>
 
       {/* Mobile Menu */}
-      <div className={`fixed top-0 left-0 w-full h-screen bg-[#050505]/95 backdrop-blur-xl z-40 transition-all duration-500 ease-in-out ${menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
-          <nav className="flex flex-col items-center justify-center h-full space-y-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleScrollTo(e, link.href)}
-                  className="text-3xl font-semibold text-gray-300 hover:text-indigo-400 transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={(e) => handleScrollTo(e, '#contact')}
-                className="mt-8 px-8 py-3 text-lg font-semibold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 transition-all duration-300 shadow-[0_0_20px_rgba(79,70,229,0.3)]"
-              >
-                Hire Me
-              </a>
-          </nav>
+      <div
+        className={`fixed inset-0 z-40 transition-all duration-500 ease-in-out ${
+          menuOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        }`}
+        style={{
+          background: 'rgba(9,9,11,0.96)',
+          backdropFilter: 'blur(30px)',
+        }}
+      >
+        <nav className="flex flex-col items-center justify-center h-full gap-8">
+          {navLinks.map((link, i) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleScrollTo(e, link.href)}
+              className={`text-2xl font-semibold transition-all duration-300 hover:text-[hsl(var(--color-cyan-base))] ${
+                activeSection === link.id ? 'text-[hsl(var(--color-cyan-base))]' : 'text-gray-300'
+              }`}
+              style={{
+                transitionDelay: menuOpen ? `${i * 50}ms` : '0ms',
+                transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
+                opacity: menuOpen ? 1 : 0,
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={(e) => handleScrollTo(e, '#contact')}
+            className="btn-primary mt-4 text-base px-8 py-3"
+          >
+            <span>Let's talk</span>
+          </a>
+        </nav>
       </div>
     </>
   );
