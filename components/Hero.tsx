@@ -11,29 +11,11 @@ const HERO_ROLES = [
 
 const CUBE_FACES = [
   { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", label: "React" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", label: "Node.js" },
+  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", label: "MongoDB" },
   { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", label: "Python" },
   { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", label: "TypeScript" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", label: "MongoDB" },
+  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", label: "Node.js" },
   { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", label: "Flutter" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", label: "JavaScript" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", label: "HTML" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", label: "CSS" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", label: "Bootstrap" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", label: "Tailwind CSS" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", label: "Git" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", label: "GitHub" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg", label: "GitLab" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitbucket/bitbucket-original.svg", label: "Bitbucket" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", label: "Docker" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg", label: "Kubernetes" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", label: "VS Code" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg", label: "IntelliJ" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg", label: "PyCharm" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg", label: "Android" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg", label: "Apple" },
-  { icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", label: "Linux" },
-
 ];
 
 const FACE_CLASSES = [
@@ -50,14 +32,6 @@ const Hero: React.FC = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
-  const [cubeOffset, setCubeOffset] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCubeOffset((prev) => (prev + 1) % CUBE_FACES.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Typewriter effect logic
   useEffect(() => {
@@ -195,15 +169,12 @@ const Hero: React.FC = () => {
                 }}
               >
                 <div className="cube">
-                  {Array.from({ length: 6 }).map((_, idx) => {
-                    const faceData = CUBE_FACES[(cubeOffset + idx) % CUBE_FACES.length];
-                    return (
-                      <div key={idx} className={`cube-face ${FACE_CLASSES[idx]}`}>
-                        <img src={faceData.icon} alt={faceData.label} />
-                        <span>{faceData.label}</span>
-                      </div>
-                    );
-                  })}
+                  {CUBE_FACES.map((face, idx) => (
+                    <div key={idx} className={`cube-face ${FACE_CLASSES[idx]}`}>
+                      <img src={face.icon} alt={face.label} />
+                      <span>{face.label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
