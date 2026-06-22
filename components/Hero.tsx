@@ -50,6 +50,14 @@ const Hero: React.FC = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const [cubeOffset, setCubeOffset] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCubeOffset((prev) => (prev + 1) % CUBE_FACES.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Typewriter effect logic
   useEffect(() => {
@@ -187,12 +195,15 @@ const Hero: React.FC = () => {
                 }}
               >
                 <div className="cube">
-                  {CUBE_FACES.map((face, idx) => (
-                    <div key={idx} className={`cube-face ${FACE_CLASSES[idx]}`}>
-                      <img src={face.icon} alt={face.label} />
-                      <span>{face.label}</span>
-                    </div>
-                  ))}
+                  {Array.from({ length: 6 }).map((_, idx) => {
+                    const faceData = CUBE_FACES[(cubeOffset + idx) % CUBE_FACES.length];
+                    return (
+                      <div key={idx} className={`cube-face ${FACE_CLASSES[idx]}`}>
+                        <img src={faceData.icon} alt={faceData.label} />
+                        <span>{faceData.label}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
