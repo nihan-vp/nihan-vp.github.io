@@ -52,12 +52,12 @@ const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 w-full px-6`}
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 w-full px-3 sm:px-6`}
       >
         <div className={`container flex justify-between items-center max-w-5xl transition-all duration-300 ${
           isScrolled 
-            ? 'pill-navbar shadow-2xl shadow-black/40 mt-4' 
-            : 'bg-transparent border-transparent py-6 mt-0'
+            ? 'pill-navbar shadow-2xl shadow-black/40 mt-3 sm:mt-4' 
+            : 'bg-transparent border-transparent py-4 sm:py-6 mt-0'
         }`}>
           {/* Logo */}
           <a
@@ -115,7 +115,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 transition-all duration-500 ease-in-out ${
+        className={`fixed inset-0 z-40 transition-all duration-500 ease-in-out overflow-y-auto ${
           menuOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
@@ -125,7 +125,7 @@ const Header: React.FC = () => {
           backdropFilter: 'blur(30px)',
         }}
       >
-        <nav className="flex flex-col items-center justify-center h-full gap-8">
+        <nav className="flex flex-col items-center justify-center min-h-full py-20 px-6 gap-6 sm:gap-8">
           {navLinks.map((link, i) => (
             <a
               key={link.href}

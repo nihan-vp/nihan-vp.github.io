@@ -10,19 +10,19 @@ const stats = [
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-28 relative">
+    <section id="about" className="py-16 sm:py-28 relative">
       <AnimatedSection>
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <h2 className="section-title gradient-text font-heading">About Me</h2>
           <div className="accent-bar" />
         </div>
       </AnimatedSection>
 
-      <div className="grid md:grid-cols-12 gap-12 items-center relative">
+      <div className="grid md:grid-cols-12 gap-8 sm:gap-12 items-center relative">
         {/* Profile Image & Accents */}
         <div className="md:col-span-5 flex justify-center">
           <AnimatedSection delay={0.1} direction="left">
-            <div className="relative group max-w-sm">
+            <div className="relative group max-w-xs sm:max-w-sm w-full mx-auto">
               <div className="absolute -inset-4 bg-gradient-to-r from-[hsl(var(--color-emerald-base))]/15 via-[hsl(var(--color-cyan-base))]/15 to-[hsl(var(--color-amber-base))]/15 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               <div className="absolute -inset-1 bg-gradient-to-r from-[hsl(var(--color-emerald-base))] to-[hsl(var(--color-cyan-base))] rounded-[2rem] opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
               <img
@@ -43,8 +43,8 @@ const About: React.FC = () => {
         {/* Bio Text */}
         <div className="md:col-span-7">
           <AnimatedSection delay={0.2} direction="3d-flip">
-            <div className="glass-card p-8 md:p-10 space-y-6">
-              <p className="text-lg text-gray-300 leading-relaxed">
+            <div className="glass-card p-5 sm:p-8 md:p-10 space-y-4 sm:space-y-6">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 Hello! I'm{' '}
                 <span className="text-white font-semibold">Nihan Ali</span>, a
                 full-stack developer with a deep passion for technology and
@@ -52,7 +52,7 @@ const About: React.FC = () => {
                 World!" and has since evolved into building scalable web
                 applications and intricate IoT solutions.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 I thrive on turning complex ideas into tangible products that are
                 both{' '}
                 <span className="text-[hsl(var(--color-cyan-base))] font-medium">user-friendly</span>{' '}
@@ -62,7 +62,7 @@ const About: React.FC = () => {
                 architecting robust back-end services and databases, I enjoy every
                 aspect of the development lifecycle.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 When I'm not coding, you can find me tinkering with hardware
                 projects, exploring new tech, or contributing to open-source
                 communities.

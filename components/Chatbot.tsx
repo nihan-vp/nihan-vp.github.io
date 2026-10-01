@@ -93,7 +93,7 @@ const Chatbot: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+    <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 max-w-[calc(100vw-1.5rem)]">
       {/* Chat button */}
       {!isOpen && (
         <button
@@ -107,7 +107,7 @@ const Chatbot: React.FC = () => {
 
       {/* Chat window */}
       {isOpen && (
-        <div className="w-[calc(100vw-2rem)] sm:w-96 h-[440px] sm:h-[480px] glass-card flex flex-col overflow-hidden border border-white/10 shadow-2xl">
+        <div className="w-[calc(100vw-1.5rem)] sm:w-96 max-h-[calc(100dvh-5rem)] h-[480px] glass-card flex flex-col overflow-hidden border border-white/10 shadow-2xl rounded-2xl">
           {/* Header */}
           <div className="px-4 py-3 bg-gradient-to-r from-[var(--accent-blue)]/20 to-[var(--accent-cyan)]/20 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-2">

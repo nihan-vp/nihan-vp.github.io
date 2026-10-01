@@ -22,7 +22,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
         </div>
 
         {/* Info Content Panel */}
-        <div className="p-6 flex flex-col flex-grow relative z-20">
+        <div className="p-5 sm:p-6 flex flex-col flex-grow relative z-20">
           <h3 className="text-xl font-bold mb-2 text-white group-hover:text-[hsl(var(--color-cyan-base))] transition-colors duration-300 font-heading">
             {project.title}
           </h3>
@@ -179,9 +179,9 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-28 relative">
+    <section id="projects" className="py-16 sm:py-28 relative">
       <AnimatedSection>
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-10 sm:mb-16 relative">
           <h2 className="section-title gradient-text font-heading">Featured Projects</h2>
           <div className="accent-bar" />
           <p className="section-subtitle">
@@ -317,7 +317,7 @@ const Projects: React.FC = () => {
       )}
 
       {/* Projects Grid Display */}
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
         {projectsList.map((project, index) => (
           <ProjectCard key={index} project={project} index={index} />
         ))}

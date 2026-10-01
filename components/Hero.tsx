@@ -78,10 +78,10 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center relative pt-24 pb-12 overflow-hidden">
-      <div className="w-full grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    <section id="home" className="min-h-screen flex items-center relative pt-20 sm:pt-24 pb-12 overflow-hidden">
+      <div className="w-full grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
         {/* Left Content Column */}
-        <div className="lg:col-span-7 flex flex-col justify-center text-left z-10 order-2 lg:order-1">
+        <div className="lg:col-span-7 flex flex-col justify-center text-left z-10 order-1">
           <AnimatedSection delay={0.1}>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] mb-6 w-fit">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -90,37 +90,37 @@ const Hero: React.FC = () => {
           </AnimatedSection>
 
           <AnimatedSection delay={0.2} direction="blur">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tight leading-[0.95] font-heading">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tight leading-[1.05] sm:leading-[0.95] font-heading">
               Hi, I'm <br />
               <span className="gradient-text-shimmer">{PERSONAL_INFO.name}</span>
               <span className="sr-only"> VP — Full-Stack Developer, IoT & AI Enthusiast Portfolio (nihanvp.in)</span>
             </h1>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.3} direction="blur" className="h-[48px] md:h-[60px] overflow-hidden mb-6">
-            <div className="flex items-center gap-2 text-2xl md:text-4xl font-semibold text-gray-300">
+          <AnimatedSection delay={0.3} direction="blur" className="min-h-[52px] sm:min-h-[48px] md:min-h-[60px] mb-6 flex items-center">
+            <div className="flex items-center flex-wrap gap-2 text-xl sm:text-2xl md:text-4xl font-semibold text-gray-300">
               <span>I build</span>
-              <div className="relative inline-block min-w-[200px]">
+              <div className="relative inline-flex items-center">
                 <span className="gradient-text font-bold">
                   {roleText}
                 </span>
-                <span className="inline-block w-[3px] h-[30px] md:h-[40px] bg-[hsl(var(--color-cyan-base))] ml-1 animate-pulse vertical-align-middle" style={{ verticalAlign: 'middle' }} />
+                <span className="inline-block w-[3px] h-[24px] sm:h-[30px] md:h-[40px] bg-[hsl(var(--color-cyan-base))] ml-1 animate-pulse" />
               </div>
             </div>
           </AnimatedSection>
 
           <AnimatedSection delay={0.4} direction="blur">
-            <p className="max-w-lg text-base md:text-lg text-gray-400 mb-10 leading-relaxed">
+            <p className="max-w-lg text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
               Crafting premium digital platforms — combining full-stack development expertise with hardware integrations and AI services. Turning ideas into responsive software.
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.5} direction="blur">
-            <div className="flex items-center flex-wrap gap-4 mb-8">
+            <div className="flex items-center flex-wrap gap-3 sm:gap-4 mb-8">
               <a
                 href="#projects"
                 onClick={(e) => handleScrollTo(e, '#projects')}
-                className="btn-primary"
+                className="btn-primary w-full sm:w-auto text-center justify-center"
               >
                 <span>Explore Projects</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@ const Hero: React.FC = () => {
               <a
                 href="#contact"
                 onClick={(e) => handleScrollTo(e, '#contact')}
-                className="btn-outline"
+                className="btn-outline w-full sm:w-auto text-center justify-center"
               >
                 <span>Get in Touch</span>
               </a>

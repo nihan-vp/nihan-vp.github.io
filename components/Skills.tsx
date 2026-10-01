@@ -32,9 +32,9 @@ const githubUsername = PERSONAL_INFO.githubUsername;
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="py-28 relative overflow-hidden">
+    <section id="skills" className="py-16 sm:py-28 relative overflow-hidden">
       <AnimatedSection>
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <h2 className="section-title gradient-text font-heading">Skills & Stack</h2>
           <div className="accent-bar" />
           <p className="section-subtitle">
@@ -44,7 +44,7 @@ const Skills: React.FC = () => {
       </AnimatedSection>
 
       {/* Infinite Horizontal Scrolling Row 1 (Forward direction) */}
-      <div className="marquee-container mb-6">
+      <div className="marquee-container mb-4 sm:mb-6">
         <div className="marquee-track gap-4">
           {[...row1Skills, ...row1Skills, ...row1Skills].map((skill, idx) => (
             <div key={idx} className="glass-card px-8 py-4 flex items-center gap-3 w-48 justify-start hover:border-[hsl(var(--color-cyan-base))]/30 flex-shrink-0">
@@ -69,7 +69,7 @@ const Skills: React.FC = () => {
       </div>
 
       {/* Infinite Horizontal Scrolling Row 2 (Reverse direction) */}
-      <div className="marquee-container mb-24">
+      <div className="marquee-container mb-16 sm:mb-24">
         <div className="marquee-track-reverse gap-4">
           {[...row2Skills, ...row2Skills, ...row2Skills].map((skill, idx) => (
             <div key={idx} className="glass-card px-8 py-4 flex items-center gap-3 w-48 justify-start hover:border-[hsl(var(--color-cyan-base))]/30 flex-shrink-0">

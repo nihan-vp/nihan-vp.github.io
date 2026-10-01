@@ -4,26 +4,26 @@ import AnimatedSection from './AnimatedSection';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="py-32 text-center relative">
+    <section id="contact" className="py-16 sm:py-28 md:py-32 text-center relative">
       <AnimatedSection>
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 sm:mb-12">
           <h2 className="section-title gradient-text">Get In Touch</h2>
           <div className="accent-bar" />
         </div>
       </AnimatedSection>
 
       <AnimatedSection delay={0.15} direction="scale">
-        <div className="max-w-3xl mx-auto glass-card p-12 md:p-16 relative overflow-hidden group">
+        <div className="max-w-3xl mx-auto glass-card p-6 sm:p-10 md:p-16 relative overflow-hidden group">
           {/* Gradient Border Glow */}
           <div className="absolute -inset-[1px] bg-gradient-to-r from-[hsl(var(--color-emerald-base))] via-[hsl(var(--color-cyan-base))] to-[hsl(var(--color-amber-base))] rounded-[1.5rem] opacity-0 group-hover:opacity-[0.1] transition-opacity duration-700 -z-10 blur-sm" />
 
           {/* Top border strip */}
           <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[hsl(var(--color-emerald-base))] via-[hsl(var(--color-cyan-base))] to-[hsl(var(--color-amber-base))]" />
 
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 font-heading">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 font-heading">
             Let's build something <span className="gradient-text">amazing</span> together
           </h3>
-          <p className="text-base text-gray-400 mb-10 leading-relaxed max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-400 mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto">
             I'm currently looking for new opportunities and collaborations. If you have a project idea, coding questions, or want to connect — shoot me a message!
           </p>
           

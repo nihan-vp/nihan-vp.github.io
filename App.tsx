@@ -132,7 +132,7 @@ const App: React.FC = () => {
 
       {/* Page content */}
       <Header />
-      <main className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+      <main className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24 relative z-10">
         <Hero />
         <About />
         <Skills />

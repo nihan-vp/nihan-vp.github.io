@@ -184,9 +184,9 @@ const ProductsSection: React.FC = () => {
   };
 
   return (
-    <section id="products" className="py-28 relative">
+    <section id="products" className="py-16 sm:py-28 relative">
       <AnimatedSection>
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-10 sm:mb-16 relative">
           <h2 className="section-title gradient-text font-heading">Digital & Hardware Products</h2>
           <div className="accent-bar" />
           <p className="section-subtitle mb-4">
@@ -351,10 +351,10 @@ const ProductsSection: React.FC = () => {
       )}
 
       {/* Products Grid Display */}
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
         {productsList.map((prod, index) => (
           <AnimatedSection key={index} delay={index * 0.1} direction="scale">
-            <div className="glass-card p-6 md:p-8 flex flex-col h-full relative group border border-white/[0.08] bg-slate-900/40 rounded-xl hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
+            <div className="glass-card p-5 sm:p-6 md:p-8 flex flex-col h-full relative group border border-white/[0.08] bg-slate-900/40 rounded-xl hover:border-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300">
               
               {/* Top Row: Icon & Type Badge */}
               <div className="flex items-center justify-between mb-6">
