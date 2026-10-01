@@ -22,7 +22,7 @@ for (let y = 0; y < h; y++) {
   for (let x = 0; x < w; x++) {
     const idx = y * rowSize + 1 + x * 4;
     const r = raw[idx], g = raw[idx+1], b = raw[idx+2], a = raw[idx+3];
-    if (a > 30) {
+    if (a > 25) {
       const isBlue = (b > 120 && b > r + 25 && b > g);
       if (x < minX) minX = x;
       if (x > maxX) maxX = x;
@@ -43,11 +43,11 @@ const cx = (minX + maxX) / 2;
 const cy = (minY + maxY) / 2;
 const span = Math.max(maxX - minX, maxY - minY);
 
-const ultraDensePoints = [];
+const megaPoints = [];
 
-// 4x4 sub-pixel sampling offsets
+// 6x6 sub-pixel sampling offsets
+const steps = [-0.40, -0.24, -0.08, 0.08, 0.24, 0.40];
 const subGrid = [];
-const steps = [-0.36, -0.12, 0.12, 0.36];
 for (const dy of steps) {
   for (const dx of steps) {
     subGrid.push([dx, dy]);
@@ -59,24 +59,24 @@ for (const p of basePixels) {
   const ny = -(p.y - cy) / span * 2;
   const type = p.isBlue ? 0 : 1;
 
-  // Primary center point
-  ultraDensePoints.push([
+  // Center anchor
+  megaPoints.push([
     Number(nx.toFixed(4)),
     Number(ny.toFixed(4)),
     type,
     Number(p.a.toFixed(2))
   ]);
 
-  // Determine sub-point count based on pixel alpha coverage for smooth edge anti-aliasing
-  const subCount = Math.round(15 * p.a); // 5 to 15 sub-points
+  // Weighted sub-point count based on pixel alpha coverage for smooth anti-aliased edges
+  const subCount = Math.round(35 * p.a); // 8 to 35 sub-points
 
   for (let s = 0; s < subCount; s++) {
     const [gx, gy] = subGrid[s % subGrid.length];
-    const jx = nx + (gx + (Math.random() - 0.5) * 0.18) / span;
-    const jy = ny + (gy + (Math.random() - 0.5) * 0.18) / span;
+    const jx = nx + (gx + (Math.random() - 0.5) * 0.12) / span;
+    const jy = ny + (gy + (Math.random() - 0.5) * 0.12) / span;
     const subAlpha = p.a * (0.85 + Math.random() * 0.15);
 
-    ultraDensePoints.push([
+    megaPoints.push([
       Number(jx.toFixed(4)),
       Number(jy.toFixed(4)),
       type,
@@ -85,10 +85,12 @@ for (const p of basePixels) {
   }
 }
 
-const content = `// Ultra-dense high-definition Pro26 crystal particle cloud (${ultraDensePoints.length} points)
+console.log('Total mega crystal points:', megaPoints.length);
+
+const content = `// Mega-dense high-definition Pro26 crystal particle matrix (${megaPoints.length} points)
 // Format: [x, y, type (0=blue P, 1=text), opacity]
-export const PRO26_DENSE_POINTS: [number, number, number, number][] = ${JSON.stringify(ultraDensePoints)};
+export const PRO26_DENSE_POINTS: [number, number, number, number][] = ${JSON.stringify(megaPoints)};
 `;
 
 fs.writeFileSync('components/pro26-dense-points.ts', content);
-console.log('Saved ultra-dense crystal points:', ultraDensePoints.length);
+console.log('Successfully saved to components/pro26-dense-points.ts');

@@ -238,8 +238,8 @@ const Pro26VortexSection: React.FC = () => {
       colors[i * 3 + 1] = baseColors[i * 3 + 1];
       colors[i * 3 + 2] = baseColors[i * 3 + 2];
 
-      // Ultra-clear crystal particle sizes with crisp facet visibility
-      const pSize = (type === 0 ? 1.30 : 1.20) * (0.90 + Math.random() * 0.20);
+      // Fine microscopic diamond & sapphire crystal particle sizes (ultra-high density)
+      const pSize = (type === 0 ? 0.42 : 0.38) * (0.88 + Math.random() * 0.24);
       baseSizes[i] = pSize;
       sizes[i] = pSize;
     }
@@ -250,7 +250,7 @@ const Pro26VortexSection: React.FC = () => {
     logoGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     const logoMaterial = new THREE.PointsMaterial({
-      size: 1.32,
+      size: 0.42,
       map: particleTexture,
       transparent: true,
       vertexColors: true,
@@ -466,7 +466,7 @@ const Pro26VortexSection: React.FC = () => {
     // ==========================================
     const springK = 0.065; // Snappy, clean return
     const damping = 0.83; // Fluid, responsive damping
-    const mouseRadius = 6.8; // Small, refined influence radius (was 26.0!)
+    const mouseRadius = 5.5; // Precision micro-crystal ripple radius
     const mouseBlast = 1.35;
 
     let animationFrameId: number;
