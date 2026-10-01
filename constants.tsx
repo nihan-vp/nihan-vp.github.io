@@ -1,4 +1,3 @@
-import { Phone } from 'lucide-react';
 import type { Project } from './types';
 
 export const PERSONAL_INFO = {

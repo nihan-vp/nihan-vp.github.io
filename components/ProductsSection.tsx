@@ -86,40 +86,40 @@ const ProductsSection: React.FC = () => {
   const [newType, setNewType] = useState<'Hardware' | 'Software' | 'SaaS'>('Hardware');
 
   // Sync / Load database helper
-  const syncProducts = async () => {
-    try {
-      const q = query(collection(db, "products"));
-      const querySnapshot = await getDocs(q);
-      const items: Product[] = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data() as Product);
-      });
-      if (items.length > 0) {
-        setProductsList(items);
-        localStorage.setItem("nihan_portfolio_products", JSON.stringify(items));
+  useEffect(() => {
+    const loadLocalFallback = () => {
+      const saved = localStorage.getItem("nihan_portfolio_products");
+      if (saved) {
+        try {
+          setProductsList(JSON.parse(saved));
+        } catch {
+          setProductsList(DEFAULT_PRODUCTS);
+        }
       } else {
-        loadLocalFallback();
-      }
-    } catch (error) {
-      console.warn("Firebase query failed, loading local storage:", error);
-      loadLocalFallback();
-    }
-  };
-
-  const loadLocalFallback = () => {
-    const saved = localStorage.getItem("nihan_portfolio_products");
-    if (saved) {
-      try {
-        setProductsList(JSON.parse(saved));
-      } catch (e) {
         setProductsList(DEFAULT_PRODUCTS);
       }
-    } else {
-      setProductsList(DEFAULT_PRODUCTS);
-    }
-  };
+    };
 
-  useEffect(() => {
+    const syncProducts = async () => {
+      try {
+        const q = query(collection(db, "products"));
+        const querySnapshot = await getDocs(q);
+        const items: Product[] = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data() as Product);
+        });
+        if (items.length > 0) {
+          setProductsList(items);
+          localStorage.setItem("nihan_portfolio_products", JSON.stringify(items));
+        } else {
+          loadLocalFallback();
+        }
+      } catch (error) {
+        console.warn("Firebase query failed, loading local storage:", error);
+        loadLocalFallback();
+      }
+    };
+
     syncProducts();
   }, []);
 
@@ -200,6 +200,7 @@ const ProductsSection: React.FC = () => {
                 onClick={() => setShowLogin(!showLogin)}
                 className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04] text-gray-500 hover:text-white hover:bg-white/[0.05] transition-colors"
                 title="Admin Access"
+                aria-label="Admin Access"
               >
                 <Lock size={16} />
               </button>
@@ -405,6 +406,7 @@ const ProductsSection: React.FC = () => {
                 </div>
                 <a
                   href="#contact"
+                  aria-label={`Inquire about ${prod.title}`}
                   className="flex items-center gap-1 text-xs font-semibold text-[hsl(var(--color-cyan-base))] hover:text-white transition-colors group/link"
                 >
                   <span>Inquire</span>

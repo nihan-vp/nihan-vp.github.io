@@ -29,6 +29,7 @@ const Contact: React.FC = () => {
           
           <a
             href={`mailto:${PERSONAL_INFO.email}`}
+            aria-label={`Send email to ${PERSONAL_INFO.name} (${PERSONAL_INFO.email})`}
             className="btn-primary inline-flex items-center gap-2"
           >
             <span>Say Hello</span>

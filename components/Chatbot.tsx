@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
+import { MessageSquare, X, Send, Bot } from 'lucide-react';
 import { PERSONAL_INFO } from '../constants';
 
 interface Message {
@@ -31,12 +31,25 @@ const Chatbot: React.FC = () => {
 
     try {
       const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY || "";
+      if (!apiKey) {
+        setTimeout(() => {
+          setMessages((prev) => [
+            ...prev,
+            {
+              sender: 'bot',
+              text: `Thanks for reaching out! I'm Nihan's portfolio assistant. You can contact Nihan directly at ${PERSONAL_INFO.email} or connect on LinkedIn at ${PERSONAL_INFO.socials.linkedin}.`
+            }
+          ]);
+          setIsLoading(false);
+        }, 500);
+        return;
+      }
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": window.location.origin.includes("localhost") ? "https://nihan-vp.me" : window.location.origin,
+          "HTTP-Referer": window.location.origin.includes("localhost") ? "https://nihanvp.in" : window.location.origin,
           "X-Title": "Nihan Portfolio Chatbot"
         },
         body: JSON.stringify({
@@ -85,6 +98,7 @@ const Chatbot: React.FC = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
+          aria-label="Open AI Assistant Chat"
           className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-[var(--accent-blue)] to-[var(--accent-cyan)] text-white flex items-center justify-center shadow-xl hover:scale-105 transition-transform border border-white/10"
         >
           <MessageSquare size={20} className="sm:w-6 sm:h-6" />
@@ -102,6 +116,7 @@ const Chatbot: React.FC = () => {
             </div>
             <button
               onClick={() => setIsOpen(false)}
+              aria-label="Close Chat Window"
               className="text-gray-400 hover:text-white transition-colors"
             >
               <X size={18} />
@@ -142,6 +157,7 @@ const Chatbot: React.FC = () => {
             />
             <button
               type="submit"
+              aria-label="Send message"
               className="p-2 bg-[var(--accent-blue)] hover:bg-[var(--accent-cyan)] text-white rounded-lg transition-colors flex items-center justify-center"
             >
               <Send size={16} />

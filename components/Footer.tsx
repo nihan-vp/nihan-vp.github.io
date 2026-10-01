@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={social.label}
+                aria-label={`Visit Nihan Ali's ${social.label} profile`}
                 className="social-icon !w-9 !h-9"
               >
                 <svg className="w-[16px] h-[16px]" fill="currentColor" viewBox="0 0 24 24">
@@ -51,6 +51,7 @@ const Footer: React.FC = () => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            aria-label="Back to top of page"
             className="text-[10px] text-gray-500 hover:text-[hsl(var(--color-cyan-base))] transition-colors duration-300 flex items-center gap-1.5 font-medium tracking-widest uppercase"
           >
             Back to top

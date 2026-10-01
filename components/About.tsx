@@ -27,7 +27,11 @@ const About: React.FC = () => {
               <div className="absolute -inset-1 bg-gradient-to-r from-[hsl(var(--color-emerald-base))] to-[hsl(var(--color-cyan-base))] rounded-[2rem] opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
               <img
                 src={profile}
-                alt="Nihan Ali — Full-Stack Developer"
+                alt="Nihan Ali — Full-Stack Developer and IoT Engineer"
+                width="384"
+                height="384"
+                loading="lazy"
+                decoding="async"
                 className="relative rounded-[2rem] shadow-2xl border border-white/10 w-full object-cover aspect-square transform transition-all duration-700 group-hover:scale-[1.02] group-hover:-rotate-1"
               />
               <div className="absolute -top-3 -right-3 w-12 h-12 border-t-2 border-r-2 border-[hsl(var(--color-cyan-base))]/40 rounded-tr-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

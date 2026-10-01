@@ -38,29 +38,35 @@ const App: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Nihan Ali VP",
-    "url": "https://nihan-vp.me",
-    "image": "https://nihan-vp.me/profile.jpg",
-    "jobTitle": "Full-Stack Developer",
+    "alternateName": ["Nihan Ali", "Nihan VP", "nihanvp"],
+    "url": "https://nihanvp.in",
+    "image": "https://nihanvp.in/profile.jpg",
+    "jobTitle": "Full-Stack Developer, IoT & AI Enthusiast",
     "description":
-      "Nihan Ali VP — Full-Stack Developer skilled in React, Node.js, MongoDB, IoT, and AI. Building modern, scalable applications and digital experiences.",
+      "Official portfolio of Nihan Ali VP — Full-Stack Developer skilled in React, Node.js, MongoDB, IoT, and AI. Building modern, scalable applications and digital experiences.",
+    "email": "mailto:qwerty311980@gmail.com",
+    "telephone": "+917736708566",
     "sameAs": [
       "https://github.com/nihan-vp",
-      "https://www.linkedin.com/in/nihan-vp",
-      "https://www.instagram.com/nihan_vp",
-      "https://nihan-vp.me"
+      "https://in.linkedin.com/in/nihan-ali-vp-b902ab382",
+      "https://twitter.com/nihan_vp",
+      "https://www.instagram.com/nihan_vp/"
     ],
     "knowsAbout": [
-      "React", "Node.js", "MongoDB", "JavaScript", "IoT", "AI",
-      "Web Development", "API Integration", "UI/UX Design"
+      "React", "Node.js", "MongoDB", "JavaScript", "TypeScript", "IoT", "AI",
+      "Web Development", "API Integration", "UI/UX Design", "Next.js"
     ],
     "worksFor": {
       "@type": "Organization",
-      "name": "Freelance / Independent Developer"
+      "name": "Freelance / Self-Employed"
     },
     "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "GVPC",
-      "sameAs": "https://www.gvpce.ac.in/"
+      "@type": "EducationalOrganization",
+      "name": "Calicut University"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN"
     }
   };
 
@@ -86,30 +92,34 @@ const App: React.FC = () => {
         <title>Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast</title>
         <meta
           name="description"
-          content="Official portfolio of Nihan Ali VP — Full-Stack Developer skilled in React, Node.js, MongoDB, IoT, and AI. Explore innovative projects, skills, and contact info."
+          content="Official portfolio of Nihan Ali VP — Full-Stack Developer skilled in React, Node.js, IoT, and AI. Explore innovative software projects, skills, and contact info."
         />
         <meta
           name="keywords"
-          content="Nihan Ali VP, Full-Stack Developer, React, Node.js, MongoDB, IoT, AI, Developer Portfolio, Web Developer India"
+          content="Nihan Ali VP, Nihan VP, nihanvp.in, Full-Stack Developer, React, Node.js, MongoDB, IoT, AI, Developer Portfolio, Web Developer India"
         />
+        <meta name="author" content="Nihan Ali VP" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta property="og:site_name" content="Nihan Ali VP Portfolio" />
         <meta property="og:title" content="Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast" />
         <meta
           property="og:description"
           content="Explore the portfolio and projects of Nihan Ali VP — Full-Stack Developer and AI innovator."
         />
-        <meta property="og:image" content="https://nihan-vp.me/profile.jpg" />
-        <meta property="og:url" content="https://nihan-vp.me" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Nihan Ali VP Portfolio" />
+        <meta property="og:image" content="https://nihanvp.in/profile.jpg" />
+        <meta property="og:url" content="https://nihanvp.in/" />
+        <meta property="og:type" content="profile" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Nihan Ali VP | Full-Stack Developer" />
+        <meta name="twitter:site" content="@nihan_vp" />
+        <meta name="twitter:creator" content="@nihan_vp" />
+        <meta name="twitter:title" content="Nihan Ali VP | Full-Stack Developer, IoT & AI Enthusiast" />
         <meta
           name="twitter:description"
           content="Explore the portfolio and skills of Nihan Ali VP — Full-Stack Developer and AI Enthusiast."
         />
-        <meta name="twitter:image" content="https://nihan-vp.me/profile.jpg" />
+        <meta name="twitter:image" content="https://nihanvp.in/profile.jpg" />
+        <link rel="canonical" href="https://nihanvp.in/" />
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-        <link rel="canonical" href="https://nihan-vp.me" />
       </Helmet>
 
       {/* Mouse glow follower */}

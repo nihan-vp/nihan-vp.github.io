@@ -93,6 +93,7 @@ const Hero: React.FC = () => {
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tight leading-[0.95] font-heading">
               Hi, I'm <br />
               <span className="gradient-text-shimmer">{PERSONAL_INFO.name}</span>
+              <span className="sr-only"> VP — Full-Stack Developer, IoT & AI Enthusiast Portfolio (nihanvp.in)</span>
             </h1>
           </AnimatedSection>
 
@@ -146,7 +147,7 @@ const Hero: React.FC = () => {
                   href={soc.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={soc.label}
+                  aria-label={`Visit Nihan Ali's ${soc.label} profile`}
                   className="social-icon"
                 >
                   <svg className="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">

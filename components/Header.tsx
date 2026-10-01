@@ -61,12 +61,13 @@ const Header: React.FC = () => {
         }`}>
           {/* Logo */}
           <a
-            href="#"
+            href="#home"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
               setMenuOpen(false);
             }}
+            aria-label="Nihan Ali VP - Home"
             className="text-xl font-bold font-heading gradient-text-shimmer hover:opacity-80 transition-opacity"
           >
             {PERSONAL_INFO.name.split(' ')[0]}

@@ -51,7 +51,11 @@ const Skills: React.FC = () => {
               <div className="w-8 h-8 flex items-center justify-center bg-white/[0.02] rounded-lg p-1.5">
                 <img
                   src={skill.logo}
-                  alt={skill.name}
+                  alt={`${skill.name} icon`}
+                  width="32"
+                  height="32"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain"
                   onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
@@ -72,7 +76,11 @@ const Skills: React.FC = () => {
               <div className="w-8 h-8 flex items-center justify-center bg-white/[0.02] rounded-lg p-1.5">
                 <img
                   src={skill.logo}
-                  alt={skill.name}
+                  alt={`${skill.name} icon`}
+                  width="32"
+                  height="32"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain"
                   onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
@@ -141,6 +149,7 @@ const Skills: React.FC = () => {
               href={`https://github.com/${githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Visit Nihan Ali's GitHub Profile (@${githubUsername})`}
               className="btn-outline !py-2 !px-5 !text-xs"
             >
               <span>Visit Profile</span>

@@ -10,4 +10,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, './'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-helmet-async'],
+          'vendor-firebase': ['firebase/app', 'firebase/firestore'],
+          'vendor-motion': ['framer-motion'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
 });

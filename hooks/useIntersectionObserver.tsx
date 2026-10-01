@@ -15,12 +15,13 @@ export const useIntersectionObserver = <T extends HTMLElement>(
     const targetRef = useRef<T>(null);
 
     useEffect(() => {
+        const currentTarget = targetRef.current;
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsIntersecting(true);
-                    if (triggerOnce && targetRef.current) {
-                        observer.unobserve(targetRef.current);
+                    if (triggerOnce && currentTarget) {
+                        observer.unobserve(currentTarget);
                     }
                 } else if (!triggerOnce) {
                     setIsIntersecting(false);
@@ -29,18 +30,16 @@ export const useIntersectionObserver = <T extends HTMLElement>(
             { threshold, rootMargin }
         );
 
-        if (targetRef.current) {
-            observer.observe(targetRef.current);
+        if (currentTarget) {
+            observer.observe(currentTarget);
         }
 
         return () => {
-            if (targetRef.current) {
-                // eslint-disable-next-line react-hooks/exhaustive-deps
-                observer.unobserve(targetRef.current);
+            if (currentTarget) {
+                observer.unobserve(currentTarget);
             }
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [targetRef, threshold, rootMargin, triggerOnce]);
+    }, [threshold, rootMargin, triggerOnce]);
 
     return [targetRef, isIntersecting];
 };
