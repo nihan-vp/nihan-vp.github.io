@@ -2,21 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { PRO26_DENSE_POINTS } from './pro26-dense-points';
 
-interface OrbitalParticle {
-  mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
-  radius: number;
-  angle: number;
-  angularSpeed: number;
-  baseZ: number;
-  zNoiseAmp: number;
-  zNoiseFreq: number;
-  zNoisePhase: number;
-}
-
 const Pro26VortexSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
-  const burstTriggerRef = useRef<() => void>(() => {});
+  const burstTriggerRef = useRef<() => void>(() => { });
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
 
@@ -162,7 +151,7 @@ const Pro26VortexSection: React.FC = () => {
     let currentLogoScale = calculateLogoScale(width, height);
 
     // ==========================================
-    // 3. Pro26 3D Logo Particle Arrays (4,785 Ultra-Dense Points)
+    // 3. Pro26 3D Logo Particle Arrays (28,000 Continuous Crystal Points)
     // ==========================================
     const numPoints = PRO26_DENSE_POINTS.length;
     const positions = new Float32Array(numPoints * 3);
@@ -205,14 +194,14 @@ const Pro26VortexSection: React.FC = () => {
       const [, , type] = PRO26_DENSE_POINTS[i];
       pointTypes[i] = type;
 
-      // Tight planar depth so crystals align in a unified plane without parallax gaps
-      targetZ[i] = (Math.random() - 0.5) * 0.35;
+      // Pure flat planar depth — zero tilt plane
+      targetZ[i] = 0;
 
       // Emergence explosion from 3D space
       if (!prefersReducedMotion) {
-        currentX[i] = targetX[i] + (Math.random() - 0.5) * 110;
-        currentY[i] = targetY[i] + (Math.random() - 0.5) * 80;
-        currentZ[i] = (Math.random() - 0.5) * 130;
+        currentX[i] = targetX[i] + (Math.random() - 0.5) * 80;
+        currentY[i] = targetY[i] + (Math.random() - 0.5) * 60;
+        currentZ[i] = (Math.random() - 0.5) * 50;
       } else {
         currentX[i] = targetX[i];
         currentY[i] = targetY[i];
@@ -265,54 +254,90 @@ const Pro26VortexSection: React.FC = () => {
     scene.add(logoPointsMesh);
 
     // ==========================================
-    // 4. Ambient 3D Swirling Vortex Logo Streams (~140 Particles)
+    // 4. Deep-Space Starfield & Cosmic Particle Background (1,500 Stars)
     // ==========================================
-    const textureLoader = new THREE.TextureLoader();
-    const miniLogoTexture = textureLoader.load('/pro26-logo.png');
-    miniLogoTexture.generateMipmaps = true;
-    miniLogoTexture.minFilter = THREE.LinearMipmapLinearFilter;
-    miniLogoTexture.magFilter = THREE.LinearFilter;
-
-    const miniLogoGeometry = new THREE.PlaneGeometry(2.1964 * 0.9, 1.0 * 0.9);
-    const vortexGroup = new THREE.Group();
-    vortexGroup.rotation.x = -0.65;
-    vortexGroup.rotation.y = 0.22;
-    scene.add(vortexGroup);
-
-    const orbitalParticles: OrbitalParticle[] = [];
-    const orbitalCount = width < 768 ? 60 : 150;
-
-    for (let i = 0; i < orbitalCount; i++) {
-      const u = Math.random();
-      const r = 26 + Math.pow(u, 1.4) * 65;
-      const angle = Math.random() * Math.PI * 2;
-      const angularSpeed = (0.35 / Math.pow(r, 0.6)) * (0.8 + Math.random() * 0.4);
-      const baseZ = -18 * Math.exp(-r / 30) + (Math.random() - 0.5) * 16;
-
-      const orbitalMat = new THREE.MeshBasicMaterial({
-        map: miniLogoTexture,
-        transparent: true,
-        opacity: 0.16 + (1 - r / 90) * 0.38,
-        depthWrite: false,
-        side: THREE.DoubleSide,
-      });
-
-      const mesh = new THREE.Mesh(miniLogoGeometry, orbitalMat);
-      const scale = 0.38 + (1 - r / 90) * 0.45;
-      mesh.scale.set(scale, scale, 1);
-      vortexGroup.add(mesh);
-
-      orbitalParticles.push({
-        mesh,
-        radius: r,
-        angle,
-        angularSpeed: prefersReducedMotion ? 0.05 : angularSpeed,
-        baseZ,
-        zNoiseAmp: 1.5 + Math.random() * 2.8,
-        zNoiseFreq: 0.5 + Math.random() * 0.7,
-        zNoisePhase: Math.random() * Math.PI * 2,
-      });
+    const sCanvas = document.createElement('canvas');
+    sCanvas.width = 64;
+    sCanvas.height = 64;
+    const sCtx = sCanvas.getContext('2d');
+    if (sCtx) {
+      const grad = sCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+      grad.addColorStop(0.25, 'rgba(224, 242, 254, 0.9)');
+      grad.addColorStop(0.55, 'rgba(56, 189, 248, 0.35)');
+      grad.addColorStop(1, 'rgba(13, 137, 232, 0)');
+      sCtx.fillStyle = grad;
+      sCtx.fillRect(0, 0, 64, 64);
     }
+    const starTexture = new THREE.CanvasTexture(sCanvas);
+    starTexture.minFilter = THREE.LinearFilter;
+    starTexture.magFilter = THREE.LinearFilter;
+
+    const numStars = 1500;
+    const starPositions = new Float32Array(numStars * 3);
+    const starColors = new Float32Array(numStars * 3);
+    const starBaseColors = new Float32Array(numStars * 3);
+    const starSpeeds = new Float32Array(numStars);
+    const starTwinkleSpeed = new Float32Array(numStars);
+    const starTwinklePhase = new Float32Array(numStars);
+    const starDriftX = new Float32Array(numStars);
+    const starDriftY = new Float32Array(numStars);
+
+    for (let i = 0; i < numStars; i++) {
+      // Cosmic 3D volume spreading deep behind the logo
+      starPositions[i * 3] = (Math.random() - 0.5) * 260;
+      starPositions[i * 3 + 1] = (Math.random() - 0.5) * 160;
+      starPositions[i * 3 + 2] = -150 + Math.random() * 138; // Z range: -150 to -12
+
+      // Star color distribution: Diamond white, Pro26 brand blue, cyan stardust, soft violet
+      const pick = Math.random();
+      let r = 1.0, g = 1.0, b = 1.0;
+      if (pick < 0.52) {
+        // Pure diamond white / ice blue
+        r = 0.95; g = 0.98; b = 1.0;
+      } else if (pick < 0.78) {
+        // Pro26 brand cosmic blue (#0D89E8)
+        r = 13 / 255; g = 137 / 255; b = 232 / 255;
+      } else if (pick < 0.93) {
+        // Bright cyan / aqua stardust (#38bdf8)
+        r = 56 / 255; g = 189 / 255; b = 248 / 255;
+      } else {
+        // Cosmic starlight violet (#a5b4fc)
+        r = 165 / 255; g = 180 / 255; b = 252 / 255;
+      }
+
+      starBaseColors[i * 3] = r;
+      starBaseColors[i * 3 + 1] = g;
+      starBaseColors[i * 3 + 2] = b;
+
+      starColors[i * 3] = r;
+      starColors[i * 3 + 1] = g;
+      starColors[i * 3 + 2] = b;
+
+      // Slow forward drift creating 3D space travel depth
+      starSpeeds[i] = 0.035 + Math.random() * 0.065;
+      starTwinkleSpeed[i] = 1.2 + Math.random() * 2.8;
+      starTwinklePhase[i] = Math.random() * Math.PI * 2;
+      starDriftX[i] = (Math.random() - 0.5) * 0.008;
+      starDriftY[i] = (Math.random() - 0.5) * 0.008;
+    }
+
+    const starGeometry = new THREE.BufferGeometry();
+    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+    const starMaterial = new THREE.PointsMaterial({
+      size: 1.25,
+      map: starTexture,
+      transparent: true,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      sizeAttenuation: true,
+    });
+
+    const starsMesh = new THREE.Points(starGeometry, starMaterial);
+    scene.add(starsMesh);
 
     // ==========================================
     // 5. Mouse Interaction & Shockwave Burst
@@ -346,14 +371,14 @@ const Pro26VortexSection: React.FC = () => {
           cursorDotRef.current.style.opacity = isHoveringLink ? '0' : '1';
         }
         if (cursorRingRef.current) {
-          cursorRingRef.current.style.transform = `translate3d(${localX}px, ${localY}px, 0)${isHoveringLink ? ' scale(1.65)' : ''}`;
+          cursorRingRef.current.style.transform = `translate3d(${localX}px, ${localY}px, 0)${isHoveringLink ? ' scale(1.3)' : ''}`;
           cursorRingRef.current.style.opacity = '1';
           if (isHoveringLink) {
             cursorRingRef.current.style.borderColor = '#3ba0ed';
             cursorRingRef.current.style.backgroundColor = 'rgba(13, 137, 232, 0.2)';
           } else {
-            cursorRingRef.current.style.borderColor = 'rgba(13, 137, 232, 0.7)';
-            cursorRingRef.current.style.backgroundColor = 'rgba(13, 137, 232, 0.1)';
+            cursorRingRef.current.style.borderColor = 'rgba(13, 137, 232, 0.8)';
+            cursorRingRef.current.style.backgroundColor = 'rgba(13, 137, 232, 0.12)';
           }
         }
 
@@ -385,12 +410,12 @@ const Pro26VortexSection: React.FC = () => {
 
     const handleMouseDown = (e: MouseEvent) => {
       if ((e.target as HTMLElement)?.closest('a, button')) return;
-      if (cursorRingRef.current) cursorRingRef.current.style.transform += ' scale(0.7)';
+      if (cursorRingRef.current) cursorRingRef.current.style.transform += ' scale(0.75)';
     };
 
     const handleMouseUp = () => {
       if (cursorRingRef.current) {
-        cursorRingRef.current.style.transform = cursorRingRef.current.style.transform.replace(' scale(0.7)', '');
+        cursorRingRef.current.style.transform = cursorRingRef.current.style.transform.replace(' scale(0.75)', '');
       }
     };
 
@@ -405,10 +430,10 @@ const Pro26VortexSection: React.FC = () => {
     const triggerBurst = () => {
       for (let i = 0; i < numPoints; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const force = 1.6 + Math.random() * 3.5;
+        const force = 1.4 + Math.random() * 3.0;
         vx[i] += Math.cos(angle) * force;
         vy[i] += Math.sin(angle) * force;
-        vz[i] += (Math.random() - 0.5) * force * 2.8;
+        vz[i] += (Math.random() - 0.5) * force * 2.0;
       }
     };
     burstTriggerRef.current = triggerBurst;
@@ -423,18 +448,6 @@ const Pro26VortexSection: React.FC = () => {
     window.addEventListener('mouseup', handleMouseUp);
     section.addEventListener('mouseleave', handleMouseLeave);
     section.addEventListener('click', handleClick);
-
-    // Scroll tracking
-    let scrollRotationOffset = 0;
-    const handleScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const vh = window.innerHeight;
-      if (rect.top < vh && rect.bottom > 0) {
-        const progress = (vh - rect.top) / (vh + rect.height);
-        scrollRotationOffset = (progress - 0.5) * 0.8;
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Resize Handler
     const handleResize = () => {
@@ -463,12 +476,12 @@ const Pro26VortexSection: React.FC = () => {
     observer.observe(section);
 
     // ==========================================
-    // 6. Animation Loop (60 FPS Physics & Waves)
+    // 6. Animation Loop (60 FPS Physics & Cosmic Stars)
     // ==========================================
-    const springK = 0.065; // Snappy, clean return
-    const damping = 0.83; // Fluid, responsive damping
-    const mouseRadius = 5.5; // Precision micro-crystal ripple radius
-    const mouseBlast = 1.35;
+    const springK = 0.075; // Snappy, clean return
+    const damping = 0.82; // Fluid, responsive damping
+    const mouseRadius = 2.8; // Ultra-small pinpoint crystal ripple radius
+    const mouseBlast = 0.95; // Gentle, elegant micro-displacement
 
     let animationFrameId: number;
     const clock = new THREE.Clock();
@@ -484,8 +497,8 @@ const Pro26VortexSection: React.FC = () => {
       let mouseVelX = 0;
       let mouseVelY = 0;
       if (mouse.isHovered) {
-        const nextX = mouse.x + (mouse.targetX - mouse.x) * 0.22;
-        const nextY = mouse.y + (mouse.targetY - mouse.y) * 0.22;
+        const nextX = mouse.x + (mouse.targetX - mouse.x) * 0.25;
+        const nextY = mouse.y + (mouse.targetY - mouse.y) * 0.25;
         mouseVelX = nextX - mouse.x;
         mouseVelY = nextY - mouse.y;
         mouse.x = nextX;
@@ -495,33 +508,49 @@ const Pro26VortexSection: React.FC = () => {
         mouse.y = 9999;
       }
 
-      // 3D Parallax Tilt for both Logo and Vortex
-      if (!prefersReducedMotion) {
-        const targetRotY = mouse.normX * 0.32;
-        const targetRotX = -mouse.normY * 0.22;
-        logoPointsMesh.rotation.y += (targetRotY - logoPointsMesh.rotation.y) * 0.045;
-        logoPointsMesh.rotation.x += (targetRotX - logoPointsMesh.rotation.x) * 0.045;
+      // No 3D tilt plane — logo remains perfectly flat and front-facing
+      logoPointsMesh.rotation.set(0, 0, 0);
 
-        vortexGroup.rotation.y += (0.22 + mouse.normX * 0.25 - vortexGroup.rotation.y) * 0.035;
-        vortexGroup.rotation.x += (-0.65 - mouse.normY * 0.22 - vortexGroup.rotation.x) * 0.035;
+      // Subtle celestial camera parallax giving immense 3D space depth without tilting logo
+      if (mouse.isHovered && !prefersReducedMotion) {
+        camera.position.x += (mouse.normX * 1.6 - camera.position.x) * 0.035;
+        camera.position.y += (mouse.normY * 1.1 - camera.position.y) * 0.035;
+      } else {
+        camera.position.x += (0 - camera.position.x) * 0.035;
+        camera.position.y += (0 - camera.position.y) * 0.035;
       }
+      camera.lookAt(0, 0, 0);
 
-      // Rotate ambient vortex around central axis
-      vortexGroup.rotation.z += 0.0018 + scrollRotationOffset * 0.001;
+      // Update Deep-Space Starfield
+      const starPosAttr = starGeometry.attributes.position as THREE.BufferAttribute;
+      const starColAttr = starGeometry.attributes.color as THREE.BufferAttribute;
+      const sPos = starPosAttr.array as Float32Array;
+      const sCol = starColAttr.array as Float32Array;
 
-      // Update ambient orbital particles
-      for (let i = 0; i < orbitalParticles.length; i++) {
-        const op = orbitalParticles[i];
-        op.angle += op.angularSpeed * 0.015;
-        const zNoise = Math.sin(elapsedTime * op.zNoiseFreq + op.zNoisePhase) * op.zNoiseAmp;
-        op.mesh.position.set(
-          Math.cos(op.angle) * op.radius,
-          Math.sin(op.angle) * op.radius,
-          op.baseZ + zNoise
-        );
+      for (let i = 0; i < numStars; i++) {
+        // Forward drift in 3D deep space
+        sPos[i * 3 + 2] += starSpeeds[i];
+        sPos[i * 3] += starDriftX[i];
+        sPos[i * 3 + 1] += starDriftY[i];
+
+        // Wrap around when star drifts close to the logo plane
+        if (sPos[i * 3 + 2] > -10) {
+          sPos[i * 3 + 2] = -150;
+          sPos[i * 3] = (Math.random() - 0.5) * 260;
+          sPos[i * 3 + 1] = (Math.random() - 0.5) * 160;
+        }
+
+        // Shimmering celestial twinkle
+        const twinkle = 0.40 + 0.60 * Math.sin(elapsedTime * starTwinkleSpeed[i] + starTwinklePhase[i]);
+        const brightness = Math.max(0.12, twinkle);
+        sCol[i * 3] = starBaseColors[i * 3] * brightness;
+        sCol[i * 3 + 1] = starBaseColors[i * 3 + 1] * brightness;
+        sCol[i * 3 + 2] = starBaseColors[i * 3 + 2] * brightness;
       }
+      starPosAttr.needsUpdate = true;
+      starColAttr.needsUpdate = true;
 
-      // Update Logo Points Physics & Harmonic Holographic Wave
+      // Update Logo Points Physics
       const posAttr = logoGeometry.attributes.position as THREE.BufferAttribute;
       const colAttr = logoGeometry.attributes.color as THREE.BufferAttribute;
       const posArr = posAttr.array as Float32Array;
@@ -531,12 +560,8 @@ const Pro26VortexSection: React.FC = () => {
         const tx = targetX[i];
         const ty = targetY[i];
 
-        // 3D Holographic undulating wave across the logo letters
-        const waveZ = prefersReducedMotion
-          ? targetZ[i]
-          : targetZ[i] +
-            Math.sin(elapsedTime * 2.2 + tx * 0.16) * 0.45 +
-            Math.cos(elapsedTime * 1.8 + ty * 0.25) * 0.25;
+        // Flat planar alignment (zero tilt, no undulating distortion)
+        const waveZ = targetZ[i];
 
         // Spring acceleration
         const fx = (tx - currentX[i]) * springK;
@@ -547,7 +572,7 @@ const Pro26VortexSection: React.FC = () => {
         vy[i] = (vy[i] + fy) * damping;
         vz[i] = (vz[i] + fz) * damping;
 
-        // Interactive Mouse Repulsion (Small, precise, fluid wake)
+        // Interactive Mouse Repulsion (Ultra-small, pinpoint ripple)
         if (mouse.isHovered && !prefersReducedMotion) {
           const dx = currentX[i] - mouse.x;
           const dy = currentY[i] - mouse.y;
@@ -559,9 +584,9 @@ const Pro26VortexSection: React.FC = () => {
             const force = Math.pow(normDist, 1.8) * mouseBlast;
 
             // Radial push + fluid velocity drag
-            vx[i] += (dx / dist) * force + mouseVelX * 0.20 * normDist;
-            vy[i] += (dy / dist) * force + mouseVelY * 0.20 * normDist;
-            vz[i] += Math.sin(dist * 1.5 - elapsedTime * 4.0) * force * 1.0;
+            vx[i] += (dx / dist) * force + mouseVelX * 0.12 * normDist;
+            vy[i] += (dy / dist) * force + mouseVelY * 0.12 * normDist;
+            vz[i] += (Math.random() - 0.5) * force * 0.3;
 
             // Highlight while preserving exact colors
             if (pointTypes[i] === 0) {
@@ -574,12 +599,12 @@ const Pro26VortexSection: React.FC = () => {
               colArr[i * 3 + 2] = 1.0;
             }
           } else {
-            // Natural Crystalline Refractive Shimmer (Diamonds & Sapphires glinting in the light wave)
+            // Natural Crystalline Refractive Shimmer (Diamonds & Sapphires glinting)
             const shimmerWave = Math.sin(elapsedTime * 2.8 + tx * 0.35 + ty * 0.25 + (i % 19) * 0.4);
             const glint = Math.pow(Math.max(0, shimmerWave), 7.0) * 0.45;
 
             if (pointTypes[i] === 0) {
-              // Sapphire crystal glint: exact blue with intense specular glint highlight
+              // Sapphire crystal glint: exact blue with specular glint highlight
               colArr[i * 3] = baseColors[i * 3] + glint * 0.22;
               colArr[i * 3 + 1] = baseColors[i * 3 + 1] + glint * 0.32;
               colArr[i * 3 + 2] = Math.min(1.0, baseColors[i * 3 + 2] + glint * 0.12);
@@ -617,19 +642,15 @@ const Pro26VortexSection: React.FC = () => {
       window.removeEventListener('mouseup', handleMouseUp);
       section.removeEventListener('mouseleave', handleMouseLeave);
       section.removeEventListener('click', handleClick);
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
 
       logoGeometry.dispose();
       logoMaterial.dispose();
       particleTexture.dispose();
 
-      orbitalParticles.forEach((op) => {
-        op.mesh.geometry.dispose();
-        op.mesh.material.dispose();
-      });
-      miniLogoGeometry.dispose();
-      miniLogoTexture.dispose();
+      starGeometry.dispose();
+      starMaterial.dispose();
+      starTexture.dispose();
 
       renderer.dispose();
       if (container.contains(renderer.domElement)) {
@@ -642,49 +663,38 @@ const Pro26VortexSection: React.FC = () => {
     <section
       id="pro26-vortex"
       ref={sectionRef}
-      className="relative w-full h-[660px] sm:h-[780px] lg:h-[900px] xl:h-[960px] overflow-hidden bg-[#050811] border-y border-white/[0.08] select-none cursor-crosshair md:cursor-none flex items-center justify-center group"
+      className="relative w-full h-[660px] sm:h-[780px] lg:h-[900px] xl:h-[960px] overflow-hidden bg-[#02040a] border-y border-white/[0.08] select-none cursor-crosshair md:cursor-none flex items-center justify-center group"
       style={{
         contain: 'paint layout',
       }}
-      title="Interactive 3D Pro26 Particle Matrix — Hover to ripple • Click to burst"
+      title=""
     >
-      {/* Sleek Small Custom Cursor Follower (Visible on desktop hover) */}
+      {/* Deep-Space Cosmic Nebula Background Glows */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 75% 55% at 50% 50%, rgba(13, 137, 232, 0.12) 0%, rgba(14, 165, 233, 0.05) 45%, transparent 75%), radial-gradient(ellipse 60% 40% at 18% 75%, rgba(99, 102, 241, 0.07) 0%, transparent 60%), radial-gradient(ellipse 55% 45% at 82% 25%, rgba(13, 137, 232, 0.08) 0%, transparent 60%)',
+        }}
+      />
+
+      {/* Sleek Ultra-Small Custom Cursor Follower (Visible on desktop hover) */}
       <div
         ref={cursorRingRef}
-        className="hidden md:block pointer-events-none absolute top-0 left-0 w-5 h-5 -ml-2.5 -mt-2.5 rounded-full border border-[#0D89E8]/70 bg-[#0D89E8]/10 backdrop-blur-[0.5px] transition-[opacity,transform,border-color,background-color] duration-75 ease-out opacity-0 z-30 shadow-[0_0_12px_rgba(13,137,232,0.45)]"
+        className="hidden md:block pointer-events-none absolute top-0 left-0 w-3.5 h-3.5 -ml-[7px] -mt-[7px] rounded-full border border-[#0D89E8]/80 bg-[#0D89E8]/15 backdrop-blur-[0.5px] transition-[opacity,transform,border-color,background-color] duration-75 ease-out opacity-0 z-30 shadow-[0_0_8px_rgba(13,137,232,0.45)]"
         aria-hidden="true"
       />
       <div
         ref={cursorDotRef}
-        className="hidden md:block pointer-events-none absolute top-0 left-0 w-1.5 h-1.5 -ml-[3px] -mt-[3px] rounded-full bg-[#0D89E8] transition-opacity duration-75 opacity-0 z-30 shadow-[0_0_6px_#0D89E8,0_0_12px_#0D89E8]"
+        className="hidden md:block pointer-events-none absolute top-0 left-0 w-1 h-1 -ml-0.5 -mt-0.5 rounded-full bg-[#0D89E8] transition-opacity duration-75 opacity-0 z-30 shadow-[0_0_4px_#0D89E8]"
         aria-hidden="true"
       />
-
-      {/* Top Subtle Brand Architecture Tag */}
-      <div className="absolute top-6 left-6 sm:top-8 sm:left-12 z-20 flex items-center gap-2.5 pointer-events-none">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0D89E8] opacity-75" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0D89E8] shadow-[0_0_8px_#0D89E8]" />
-        </span>
-        <span className="text-[11px] sm:text-xs font-mono tracking-widest uppercase text-gray-400">
-          Pro26 Interactive Architecture
-        </span>
-      </div>
 
       {/* 3D WebGL Canvas spanning the entire full width and height of the section */}
       <div
         ref={canvasContainerRef}
-        className="absolute inset-0 pointer-events-none overflow-hidden z-0"
+        className="absolute inset-0 pointer-events-none overflow-hidden z-[1]"
         aria-hidden="true"
-      />
-
-      {/* Atmospheric Central Pro26 Blue Glow */}
-      <div
-        className="absolute inset-0 pointer-events-none z-[1]"
-        style={{
-          background:
-            'radial-gradient(ellipse 85% 70% at 50% 50%, rgba(13, 137, 232, 0.08) 0%, rgba(10, 14, 23, 0.45) 55%, rgba(5, 8, 17, 0.98) 100%)',
-        }}
       />
 
       {/* Soft Vignette top/bottom masks for seamless edge transitions */}
@@ -726,11 +736,6 @@ const Pro26VortexSection: React.FC = () => {
         </a>
 
         {/* Micro-hint interaction label */}
-        <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-mono text-gray-500 tracking-wider uppercase opacity-80 pointer-events-none">
-          <span>Move cursor to ripple</span>
-          <span className="text-[#0D89E8]">•</span>
-          <span>Click to disperse</span>
-        </div>
       </div>
     </section>
   );

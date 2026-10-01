@@ -463,7 +463,7 @@ const Pro26ParticleLogo: React.FC<Pro26ParticleLogoProps> = ({
         ref={mountRef}
         className="w-full cursor-pointer relative overflow-hidden select-none"
         style={{ width, height }}
-        title="Interactive 3D Pro26 Particle Logo — Click to disperse"
+        title=""
       />
 
       {/* Subtle Hint & Interactive Actions */}
