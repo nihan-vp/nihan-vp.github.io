@@ -205,7 +205,8 @@ const Pro26VortexSection: React.FC = () => {
       const [, , type] = PRO26_DENSE_POINTS[i];
       pointTypes[i] = type;
 
-      targetZ[i] = (Math.random() - 0.5) * 1.5;
+      // Tight planar depth so crystals align in a unified plane without parallax gaps
+      targetZ[i] = (Math.random() - 0.5) * 0.35;
 
       // Emergence explosion from 3D space
       if (!prefersReducedMotion) {
@@ -238,8 +239,8 @@ const Pro26VortexSection: React.FC = () => {
       colors[i * 3 + 1] = baseColors[i * 3 + 1];
       colors[i * 3 + 2] = baseColors[i * 3 + 2];
 
-      // Fine microscopic diamond & sapphire crystal particle sizes (ultra-high density)
-      const pSize = (type === 0 ? 0.42 : 0.38) * (0.88 + Math.random() * 0.24);
+      // Seamless crystal particle size: overlaps facet-to-facet with ZERO gaps between crystals
+      const pSize = (type === 0 ? 0.62 : 0.56) * (0.92 + Math.random() * 0.16);
       baseSizes[i] = pSize;
       sizes[i] = pSize;
     }
@@ -250,7 +251,7 @@ const Pro26VortexSection: React.FC = () => {
     logoGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     const logoMaterial = new THREE.PointsMaterial({
-      size: 0.42,
+      size: 0.60,
       map: particleTexture,
       transparent: true,
       vertexColors: true,
@@ -534,8 +535,8 @@ const Pro26VortexSection: React.FC = () => {
         const waveZ = prefersReducedMotion
           ? targetZ[i]
           : targetZ[i] +
-            Math.sin(elapsedTime * 2.5 + tx * 0.18) * 0.95 +
-            Math.cos(elapsedTime * 1.9 + ty * 0.30) * 0.55;
+            Math.sin(elapsedTime * 2.2 + tx * 0.16) * 0.45 +
+            Math.cos(elapsedTime * 1.8 + ty * 0.25) * 0.25;
 
         // Spring acceleration
         const fx = (tx - currentX[i]) * springK;

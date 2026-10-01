@@ -22,7 +22,7 @@ for (let y = 0; y < h; y++) {
   for (let x = 0; x < w; x++) {
     const idx = y * rowSize + 1 + x * 4;
     const r = raw[idx], g = raw[idx+1], b = raw[idx+2], a = raw[idx+3];
-    if (a > 25) {
+    if (a > 20) {
       const isBlue = (b > 120 && b > r + 25 && b > g);
       if (x < minX) minX = x;
       if (x > maxX) maxX = x;
@@ -43,10 +43,11 @@ const cx = (minX + maxX) / 2;
 const cy = (minY + maxY) / 2;
 const span = Math.max(maxX - minX, maxY - minY);
 
-const megaPoints = [];
+const seamlessMegaPoints = [];
 
-// 6x6 sub-pixel sampling offsets
-const steps = [-0.40, -0.24, -0.08, 0.08, 0.24, 0.40];
+// Seamless edge-to-edge sub-pixel lattice
+// Steps from -0.50 to +0.50 guarantee ZERO gaps between adjacent pixels!
+const steps = [-0.50, -0.30, -0.10, 0.10, 0.30, 0.50];
 const subGrid = [];
 for (const dy of steps) {
   for (const dx of steps) {
@@ -59,24 +60,25 @@ for (const p of basePixels) {
   const ny = -(p.y - cy) / span * 2;
   const type = p.isBlue ? 0 : 1;
 
-  // Center anchor
-  megaPoints.push([
+  // Center point
+  seamlessMegaPoints.push([
     Number(nx.toFixed(4)),
     Number(ny.toFixed(4)),
     type,
     Number(p.a.toFixed(2))
   ]);
 
-  // Weighted sub-point count based on pixel alpha coverage for smooth anti-aliased edges
-  const subCount = Math.round(35 * p.a); // 8 to 35 sub-points
+  // Sub-points covering full pixel area without gaps
+  const subCount = Math.round(36 * p.a); // 8 to 36 sub-points
 
   for (let s = 0; s < subCount; s++) {
     const [gx, gy] = subGrid[s % subGrid.length];
-    const jx = nx + (gx + (Math.random() - 0.5) * 0.12) / span;
-    const jy = ny + (gy + (Math.random() - 0.5) * 0.12) / span;
-    const subAlpha = p.a * (0.85 + Math.random() * 0.15);
+    // Gentle micro-jitter with slight boundary overlap to eliminate any dark lines
+    const jx = nx + (gx + (Math.random() - 0.5) * 0.14) / span;
+    const jy = ny + (gy + (Math.random() - 0.5) * 0.14) / span;
+    const subAlpha = p.a * (0.88 + Math.random() * 0.12);
 
-    megaPoints.push([
+    seamlessMegaPoints.push([
       Number(jx.toFixed(4)),
       Number(jy.toFixed(4)),
       type,
@@ -85,11 +87,11 @@ for (const p of basePixels) {
   }
 }
 
-console.log('Total mega crystal points:', megaPoints.length);
+console.log('Total seamless mega crystal points:', seamlessMegaPoints.length);
 
-const content = `// Mega-dense high-definition Pro26 crystal particle matrix (${megaPoints.length} points)
+const content = `// Seamless ultra-dense Pro26 crystal particle matrix (${seamlessMegaPoints.length} points)
 // Format: [x, y, type (0=blue P, 1=text), opacity]
-export const PRO26_DENSE_POINTS: [number, number, number, number][] = ${JSON.stringify(megaPoints)};
+export const PRO26_DENSE_POINTS: [number, number, number, number][] = ${JSON.stringify(seamlessMegaPoints)};
 `;
 
 fs.writeFileSync('components/pro26-dense-points.ts', content);
