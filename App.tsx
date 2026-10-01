@@ -8,6 +8,7 @@ import ProductsSection from './components/ProductsSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
+import Pro26VortexSection from './components/Pro26VortexSection';
 import { Helmet } from 'react-helmet-async';
 
 const App: React.FC = () => {
@@ -126,19 +127,27 @@ const App: React.FC = () => {
       <div
         className="hidden lg:block pointer-events-none fixed inset-0 z-40 transition duration-150"
         style={{
-          background: `radial-gradient(500px at ${cursorPos.x}px ${cursorPos.y}px, rgba(6, 182, 212, 0.05), transparent 80%)`,
+          background: `radial-gradient(240px at ${cursorPos.x}px ${cursorPos.y}px, rgba(13, 137, 232, 0.05), transparent 75%)`,
         }}
       />
 
       {/* Page content */}
       <Header />
-      <main className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24 relative z-10">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <ProductsSection />
-        <Contact />
+      <main className="relative z-10 w-full overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
+          <Hero />
+          <About />
+        </div>
+
+        {/* Standalone Full-Width 3D Pro26 Vortex Section */}
+        <Pro26VortexSection />
+
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
+          <Skills />
+          <Projects />
+          <ProductsSection />
+          <Contact />
+        </div>
       </main>
       <Footer />
       <Chatbot />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PERSONAL_INFO } from '../constants';
 import AnimatedSection from './AnimatedSection';
+import Pro26ParticleLogo from './Pro26ParticleLogo';
 
 const HERO_ROLES = [
   "Full-Stack Web Apps",
@@ -32,6 +33,7 @@ const Hero: React.FC = () => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const [activeVisual, setActiveVisual] = useState<'particle' | 'cube'>('particle');
 
   // Typewriter effect logic
   useEffect(() => {
@@ -159,28 +161,60 @@ const Hero: React.FC = () => {
           </AnimatedSection>
         </div>
 
-        {/* Right Graphic Column: 3D rotating Cube */}
+        {/* Right Graphic Column: 3D Interactive Visual Showcase */}
         <div className="lg:col-span-5 flex flex-col justify-center items-center relative order-1 lg:order-2 w-full mt-8 lg:mt-0">
-          <AnimatedSection direction="scale" delay={0.3}>
-            <div className="cube-scene">
-              <div
-                className="cube-gimbal"
-                style={{
-                  transform: `rotateX(${mouseOffset.y * 0.15}deg) rotateY(${mouseOffset.x * 0.15}deg)`,
-                }}
+          <AnimatedSection direction="scale" delay={0.3} className="w-full flex flex-col items-center">
+            {/* Visual Mode Selector */}
+            <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/[0.08] mb-5 backdrop-blur-md">
+              <button
+                onClick={() => setActiveVisual('particle')}
+                className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all duration-300 ${
+                  activeVisual === 'particle'
+                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg shadow-cyan-500/10'
+                    : 'text-gray-400 hover:text-white'
+                }`}
               >
-                <div className="cube">
-                  {CUBE_FACES.map((face, idx) => (
-                    <div key={idx} className={`cube-face ${FACE_CLASSES[idx]}`}>
-                      <img src={face.icon} alt={face.label} />
-                      <span>{face.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                Pro26 Particles
+              </button>
+              <button
+                onClick={() => setActiveVisual('cube')}
+                className={`px-3.5 py-1 rounded-full text-xs font-mono transition-all duration-300 ${
+                  activeVisual === 'cube'
+                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg shadow-cyan-500/10'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                Stack Cube
+              </button>
             </div>
-            {/* Cube shadow */}
-            <div className="cube-shadow" />
+
+            {activeVisual === 'particle' ? (
+              <div className="w-full flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-900/40 border border-white/[0.06] backdrop-blur-md shadow-2xl">
+                <Pro26ParticleLogo height="280px" scaleFactor={1.0} showControls={true} />
+              </div>
+            ) : (
+              <>
+                <div className="cube-scene">
+                  <div
+                    className="cube-gimbal"
+                    style={{
+                      transform: `rotateX(${mouseOffset.y * 0.15}deg) rotateY(${mouseOffset.x * 0.15}deg)`,
+                    }}
+                  >
+                    <div className="cube">
+                      {CUBE_FACES.map((face, idx) => (
+                        <div key={idx} className={`cube-face ${FACE_CLASSES[idx]}`}>
+                          <img src={face.icon} alt={face.label} />
+                          <span>{face.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {/* Cube shadow */}
+                <div className="cube-shadow" />
+              </>
+            )}
           </AnimatedSection>
         </div>
       </div>

@@ -101,56 +101,69 @@ const Skills: React.FC = () => {
         </div>
       </AnimatedSection>
 
-      <div className="grid lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto w-full">
 
-        {/* Contribution Line Graph */}
-        <AnimatedSection className="lg:col-span-3" delay={0.08}>
-          <div className="glass-card p-6 flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-4">
-              <h4 className="font-bold text-gray-200 font-heading">Contribution Activity Graph</h4>
-              <span className="text-xs text-gray-500 uppercase tracking-wider">Trend Analysis</span>
+        {/* Contribution Line Graph / Heatmap */}
+        <AnimatedSection className="md:col-span-3" delay={0.08}>
+          <div className="glass-card p-4 sm:p-6 flex flex-col justify-between overflow-hidden">
+            <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+              <h4 className="font-bold text-gray-200 font-heading text-sm sm:text-base">Contribution Activity Graph</h4>
+              <span className="text-[11px] sm:text-xs text-gray-500 uppercase tracking-wider">Trend Analysis</span>
             </div>
-            <div className="bg-black/20 rounded-xl p-4 overflow-x-auto flex items-center justify-center">
+            <div className="bg-black/30 rounded-xl p-3 sm:p-4 overflow-x-auto custom-scrollbar flex items-center justify-center">
               <img
-                src={`https://github-readme-activity-graph.vercel.app/graph?username=${githubUsername}&bg_color=0a0e17&color=06b6d4&line=3b82f6&point=8b5cf6&area=true&hide_border=true`}
-                alt="GitHub Contributions Line Graph"
-                className="min-w-[600px] md:min-w-0 md:w-full rounded-lg"
+                src={`https://ghchart.rshah.org/06b6d4/${githubUsername}`}
+                alt="GitHub Contributions Calendar Graph"
+                className="w-full min-w-[540px] sm:min-w-0 max-w-full h-auto rounded-lg"
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  // Fallback to github-readme-stats if ghchart is unavailable
+                  e.currentTarget.src = `https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&bg_color=0a0e17&title_color=06b6d4&text_color=94a3b8&icon_color=3b82f6&border_color=00000000&hide_border=true`;
+                }}
               />
             </div>
+            <p className="text-[11px] text-gray-500 text-center mt-2.5 sm:hidden">
+              Swipe horizontally to view full activity calendar
+            </p>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="lg:col-span-2" delay={0.1}>
-          <div className="glass-card p-6 flex flex-col h-full justify-between">
+        {/* Activity Streak */}
+        <AnimatedSection className="md:col-span-2" delay={0.1}>
+          <div className="glass-card p-4 sm:p-6 flex flex-col h-full justify-between overflow-hidden">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="font-bold text-gray-200 font-heading">Activity Streak</h4>
-              <span className="text-xs text-gray-500 uppercase tracking-wider">Live Stats</span>
+              <h4 className="font-bold text-gray-200 font-heading text-sm sm:text-base">Activity Streak</h4>
+              <span className="text-[11px] sm:text-xs text-gray-500 uppercase tracking-wider">Live Stats</span>
             </div>
-            <div className="bg-black/20 rounded-xl p-3 flex items-center justify-center">
+            <div className="bg-black/30 rounded-xl p-2 sm:p-3 flex items-center justify-center overflow-hidden">
               <img
                 src={`https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=dark&hide_border=true&stroke=3b82f6&ring=06b6d4&fire=f59e0b&currStreakLabel=D1D5DB&sideLabels=D1D5DB&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=D1D5DB&background=00000000`}
                 alt="GitHub Streak"
-                className="w-full max-w-md rounded-lg"
+                className="w-full max-w-full sm:max-w-md h-auto rounded-lg object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.15}>
-          <div className="glass-card p-6 flex flex-col items-center justify-center text-center h-full">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4 text-black shadow-lg shadow-cyan-500/10">
+        {/* GitHub Profile Card */}
+        <AnimatedSection className="md:col-span-1" delay={0.15}>
+          <div className="glass-card p-5 sm:p-6 flex flex-col items-center justify-center text-center h-full">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3 sm:mb-4 text-black shadow-lg shadow-cyan-500/10">
               <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
               </svg>
             </div>
-            <h4 className="font-bold text-lg text-white mb-1 font-heading">@{githubUsername}</h4>
-            <p className="text-xs text-gray-400 mb-5">Explore open source codes & contributions</p>
+            <h4 className="font-bold text-base sm:text-lg text-white mb-1 font-heading">@{githubUsername}</h4>
+            <p className="text-xs text-gray-400 mb-4 sm:mb-5 max-w-[200px]">Explore open source codes & contributions</p>
             <a
               href={`https://github.com/${githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Visit Nihan Ali's GitHub Profile (@${githubUsername})`}
-              className="btn-outline !py-2 !px-5 !text-xs"
+              className="btn-outline !py-2 !px-5 !text-xs w-full sm:w-auto text-center"
             >
               <span>Visit Profile</span>
             </a>
