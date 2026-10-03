@@ -59,7 +59,8 @@ const App: React.FC = () => {
     ],
     "worksFor": {
       "@type": "Organization",
-      "name": "Freelance / Self-Employed"
+      "name": "UNIFIED PRO26 LLP",
+      "url": "https://www.pro26.in"
     },
     "alumniOf": {
       "@type": "EducationalOrganization",

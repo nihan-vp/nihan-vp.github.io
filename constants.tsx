@@ -3,11 +3,14 @@ import type { Project } from './types';
 export const PERSONAL_INFO = {
   name: "Nihan Ali",
   title: "Full-Stack Developer",
+  company: "UNIFIED PRO26 LLP",
+  companyUrl: "https://www.pro26.in",
   githubUsername: "nihan-vp",
   socials: {
     github: "https://github.com/nihan-vp",
     linkedin: "https://in.linkedin.com/in/nihan-ali-vp-b902ab382",
     twitter: "https://twitter.com",
+    company: "https://www.pro26.in",
   },
   email: "qwerty311980@gmail.com",
   phone: "+91 7736708566"
