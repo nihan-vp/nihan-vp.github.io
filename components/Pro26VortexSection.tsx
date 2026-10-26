@@ -663,7 +663,7 @@ const Pro26VortexSection: React.FC = () => {
     <section
       id="pro26-vortex"
       ref={sectionRef}
-      className="relative w-full h-[660px] sm:h-[780px] lg:h-[900px] xl:h-[960px] overflow-hidden bg-[#02040a] border-y border-white/[0.08] select-none cursor-crosshair md:cursor-none flex items-center justify-center group"
+      className="hidden sm:flex relative w-full h-[660px] sm:h-[780px] lg:h-[900px] xl:h-[960px] overflow-hidden bg-[#02040a] border-y border-white/[0.08] select-none cursor-crosshair md:cursor-none items-center justify-center group"
       style={{
         contain: 'paint layout',
       }}
