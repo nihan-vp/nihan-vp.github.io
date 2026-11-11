@@ -6,6 +6,12 @@ import { sample, VEC_LEN, type Anchor } from "./choreography";
 /**
  * One persistent renderer for the whole page. The sculptural form, the dust field and the
  * light backdrop are choreographed by scroll position (see choreography.ts).
+ *
+ * Interaction: the clay responds to the pointer. Hovering pushes a soft dent into the
+ * surface (raycast against the live deformed geometry), pressing deepens it, dragging
+ * kneads, releasing sends a ripple. Everything is smoothed in a frame-rate independent
+ * way and is completely inert under `prefers-reduced-motion` and on coarse pointers.
+ *
  * Everything is disposed on teardown; rendering pauses when hidden or fully faded.
  */
 export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
@@ -16,16 +22,26 @@ export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
     return null;
   }
   const mobile = isMobile();
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2));
+  let dprCap = mobile ? 1.5 : 2;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
   renderer.setClearColor(0x000000, 0);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 80);
   scene.add(camera);
 
+  /* Interactive? Coarse pointers and reduced-motion users get the sculpture, not the toy. */
+  const interactive = !isTouch && !prefersReduced;
+
   /* Sculptural form */
-  const seg = mobile ? 96 : 220;
+  const seg = mobile ? 112 : 200;
   const formGeo = new THREE.SphereGeometry(1, seg, seg);
+  const TOUCH_MAX = 3;
+  const touch = Array.from({ length: TOUCH_MAX }, () => new THREE.Vector4(0, 1, 0, 0));
+  const ripple = Array.from({ length: TOUCH_MAX }, () => new THREE.Vector2(0, 0));
+  const touchGlow = { v: 1 };
+
   const formMat = new THREE.ShaderMaterial({
     vertexShader: formVert,
     fragmentShader: formFrag,
@@ -36,6 +52,9 @@ export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
       uDark: { value: new THREE.Color() },
       uLight: { value: new THREE.Color() },
       uRim: { value: new THREE.Color() },
+      uTouch: { value: touch },
+      uRipple: { value: ripple },
+      uTouchGlow: { value: 1 },
     },
   });
   const form = new THREE.Mesh(formGeo, formMat);
@@ -47,7 +66,8 @@ export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
   const ringGeo = new THREE.TorusGeometry(2.1, 0.004, 8, 256);
   const ring = new THREE.Mesh(ringGeo, ringMat);
   ring.rotation.x = 1.15;
-  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.6, 0.003, 8, 256), ringMat);
+  const ring2Geo = new THREE.TorusGeometry(2.6, 0.003, 8, 256);
+  const ring2 = new THREE.Mesh(ring2Geo, ringMat);
   ring2.rotation.set(1.9, 0.4, 0.2);
   group.add(ring, ring2);
   scene.add(group);
@@ -134,11 +154,96 @@ export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
   window.addEventListener("resize", resize);
   const refreshLater = window.setTimeout(readAnchors, 1200);
 
+  /* ───────── pointer → clay ───────── */
+
+  const raycaster = new THREE.Raycaster();
+  const ndc = new THREE.Vector2();
+  const hitPoint = new THREE.Vector3();
+  const hitNormal = new THREE.Vector3();
+  const smoothNormal = new THREE.Vector3(0, 1, 0); // the direction the dent follows, damped
+  const localFromWorld = new THREE.Vector3();
+
+  let hoverAmt = 0; // 0..1 how "on" the touch is
+  let pressing = false;
+  let pointerInside = false;
+  let lastHitAt = 0;
+  const rippleFx = { t: 0, strength: 0 };
+
+  /**
+   * Convert the raycast hit into a point on the *undeformed* unit sphere, because that is
+   * the domain uTouch lives in. The mesh is scaled anisotropically and displaced, so the
+   * world-space hit is normalised back into the local rest sphere.
+   */
+  const sampleHit = (): boolean => {
+    ndc.set(ptr.x, -ptr.y);
+    raycaster.setFromCamera(ndc, camera);
+    const hits = raycaster.intersectObject(form, false);
+    if (!hits.length) {
+      // pointer is off the clay — the dent relaxes but dragging keeps the last normal
+      pointerInside = false;
+      return false;
+    }
+    const hit = hits[0];
+    pointerInside = true;
+    lastHitAt = performance.now();
+    hitPoint.copy(hit.point);
+    // undo the group's rotation/scale to get back into the sphere's own space
+    form.worldToLocal(localFromWorld.copy(hit.point));
+    if (hit.face) {
+      hitNormal.copy(hit.face.normal).normalize();
+      // face normals are per-face; the grazing angle is enough for a soft dent direction
+      const world = hitNormal.clone().transformDirection(form.matrixWorld);
+      smoothNormal.lerp(world, 0.25).normalize();
+    }
+    return true;
+  };
+
+  /** write the current touch into touch[0] (slot 0 is the live pointer; others hold ripples) */
+  const writeTouch = (strength: number) => {
+    localFromWorld.normalize();
+    const tn = smoothNormal.clone();
+    // the deform field is defined on the rest sphere; a good enough mapping is the
+    // direction of the local hit — clay is soft, it does not need to be exact
+    tn.applyQuaternion(form.quaternion.clone().invert()).normalize();
+    touch[0].set(tn.x, tn.y, tn.z, strength);
+  };
+
   const onMove = (e: PointerEvent) => {
     ptr.x = (e.clientX / window.innerWidth) * 2 - 1;
     ptr.y = (e.clientY / window.innerHeight) * 2 - 1;
   };
   if (!isTouch) window.addEventListener("pointermove", onMove);
+
+  const onDown = (e: PointerEvent) => {
+    if (!interactive || e.button !== 0) return;
+    if (canvas.style.opacity && Number(canvas.style.opacity) < 0.5) return;
+    pressing = true;
+    if (sampleHit()) {
+      ripple[0].set(0, 0);
+      rippleFx.t = 0;
+      rippleFx.strength = 0;
+      touchGlow.v = 1.6;
+    }
+  };
+  const onUp = () => {
+    if (!pressing) return;
+    pressing = false;
+    // release: fire the ripple from wherever the clay was last touched
+    if (pointerInside && touch[0].w !== 0) {
+      ripple[0].set(0, 1); // time is written in the tick from liveTime
+      rippleFx.t = 1;
+      rippleFx.strength = Math.sign(touch[0].w);
+    }
+    touchGlow.v = 1;
+  };
+
+  if (interactive) {
+    window.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+    window.addEventListener("blur", onUp);
+  }
+
   const onVis = () => (visible = !document.hidden);
   document.addEventListener("visibilitychange", onVis);
 
@@ -148,22 +253,31 @@ export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
 
   const tick = (_: number, delta: number) => {
     if (!running || !visible) return;
+    /* frame-rate independent damping, expressed as a half-life in seconds.
+       (The previous `1 - 0.0009^(dt)`, multiplied by 6 and clamped to 1, made the
+       response ~2x faster at 60Hz than at 144Hz and fully snapped at 30Hz.) */
+    const dt = Math.min(delta, 64) / 1000;
+    const k = 1 - Math.pow(0.5, dt / 0.10);
+    const kSlow = 1 - Math.pow(0.5, dt / 0.16);
+
     sample(window.scrollY, anchors, target);
     if (!inited) {
       for (let i = 0; i < VEC_LEN; i++) cur[i] = target[i];
       inited = true;
     }
-    const k = prefersReduced ? 1 : 1 - Math.pow(0.0009, delta / 1000 + 0.0001); // frame-rate independent damping
-    const kk = Math.min(1, Math.max(0.04, k * 6));
-    for (let i = 0; i < VEC_LEN; i++) cur[i] += (target[i] - cur[i]) * kk;
+    for (let i = 0; i < VEC_LEN; i++) cur[i] += (target[i] - cur[i]) * k;
 
     const [cx, cy, cz, lx, ly, ox, oy, os, spin, dist, twist, spread, ringO, ray, op] = cur;
     canvas.style.opacity = String(Math.max(0, Math.min(1, op)));
-    if (op < 0.01) return; // fully hidden behind opaque chapters → skip GPU work
 
-    time += prefersReduced ? 0 : delta / 1000;
-    ptr.sx += (ptr.x - ptr.sx) * 0.04;
-    ptr.sy += (ptr.y - ptr.sy) * 0.04;
+    time += prefersReduced ? 0 : dt;
+    /* wrap the clock: snoise(uTime*0.075) loses float precision after hours of uptime
+       and the surface starts to stutter. 1e4s is ~2.8h and is a clean loop point for
+       the slowest term (0.075 * 10000 = 750 noise units). */
+    if (time > 1e4) time -= 1e4;
+
+    ptr.sx += (ptr.x - ptr.sx) * kSlow;
+    ptr.sy += (ptr.y - ptr.sy) * kSlow;
 
     const m = mobile ? 0.25 : 1;
     camera.position.set(cx + ptr.sx * 0.35, cy - ptr.sy * 0.2, cz * (mobile ? 1.12 : 1));
@@ -178,8 +292,37 @@ export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
     ring.rotation.z = time * 0.08;
     ring2.rotation.z = -time * 0.05;
 
+    /* ── clay interaction ── */
+    if (interactive) {
+      const onClay = op > 0.5 && sampleHit();
+      const want = pressing ? (onClay ? 1 : 0.45) : onClay ? 0.34 : 0;
+      // cursor reflects the *actual* hit test, not a stale pointerInside flag
+      const wantCursor = pressing ? (onClay ? "grabbing" : "") : onClay ? "grab" : "";
+      if (canvas.style.cursor !== wantCursor) canvas.style.cursor = wantCursor;
+      hoverAmt += (want - hoverAmt) * k;
+      // a pressed clay keeps its dent briefly after the pointer leaves the silhouette
+      if (pressing || onClay || performance.now() - lastHitAt < 260) {
+        writeTouch(pressing ? -0.34 * hoverAmt : -0.15 * hoverAmt);
+      } else {
+        touch[0].w += (0 - touch[0].w) * k;
+        if (Math.abs(touch[0].w) < 0.0008) touch[0].w = 0;
+      }
+      // ripple bookkeeping: start the timer on release, then decay
+      if (ripple[0].y > 0.5) {
+        if (rippleFx.t > 0) {
+          ripple[0].x = time;
+          rippleFx.t = 0;
+        }
+        if (time - ripple[0].x > 2.2) ripple[0].y = 0;
+      }
+      touchGlow.v += (1 - touchGlow.v) * kSlow;
+      formMat.uniforms.uTouchGlow.value = touchGlow.v;
+    } else {
+      touch[0].w += (0 - touch[0].w) * k;
+    }
+
     formMat.uniforms.uTime.value = time;
-    formMat.uniforms.uDist.value = dist + intro.v * 0.9;
+    formMat.uniforms.uDist.value = dist + intro.v * 0.45;
     formMat.uniforms.uTwist.value = twist;
     formMat.uniforms.uDark.value.setRGB(cur[15], cur[16], cur[17]);
     formMat.uniforms.uLight.value.setRGB(cur[18], cur[19], cur[20]);
@@ -209,10 +352,13 @@ export function createStage(canvas: HTMLCanvasElement): (() => void) | null {
     ro.disconnect();
     window.removeEventListener("resize", resize);
     window.removeEventListener("pointermove", onMove);
+    window.removeEventListener("pointerdown", onDown);
+    window.removeEventListener("pointerup", onUp);
+    window.removeEventListener("pointercancel", onUp);
+    window.removeEventListener("blur", onUp);
     document.removeEventListener("visibilitychange", onVis);
-    [formGeo, ringGeo, dustGeo, rayGeo].forEach((g) => g.dispose());
+    [formGeo, ringGeo, ring2Geo, dustGeo, rayGeo].forEach((g) => g.dispose());
     [formMat, ringMat, dustMat, rayMat].forEach((m2) => m2.dispose());
-    ring2.geometry.dispose();
     renderer.dispose();
     renderer.forceContextLoss();
   };

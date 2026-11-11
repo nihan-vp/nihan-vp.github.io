@@ -16,4 +16,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  server: {
+    // Allow tunnelled preview hosts (e.g. *.e2b.app) to reach the dev server.
+    allowedHosts: true,
+  },
 });
