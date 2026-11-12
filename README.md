@@ -1,6 +1,6 @@
 # Nihan Ali V P — Immersive Portfolio
 
-Creativity first. Technology underneath. A scroll-directed WebGL experience.
+Where creativity meets technology. A scroll-directed WebGL experience.
 
 ## Stack
 React 19 · Vite · TypeScript · Three.js (custom GLSL) · GSAP + ScrollTrigger (+ MorphSVG) · Lenis · SplitType · Tailwind (base only; the visual system is hand-written CSS).

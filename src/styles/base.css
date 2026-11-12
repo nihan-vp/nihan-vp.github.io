@@ -146,6 +146,35 @@ html.cursor-live .cursor-dot, html.cursor-live .cursor-ring { opacity: 1; }
 .f-aero { --pf: "Cormorant Garamond", serif; --pw: 300; --pt: none; --pl: 0.01em; --ps: italic; --pv: normal; }
 .f-qevroc { --pf: "Unbounded", sans-serif; --pw: 600; --pt: uppercase; --pl: -0.02em; --ps: normal; --pv: normal; }
 
+/* ───────── Clay Studio HUD ───────── */
+.clay-hud { position: fixed; left: clamp(0.9rem, 2vw, 1.6rem); bottom: clamp(0.9rem, 2vw, 1.6rem); z-index: 90; transition: opacity 0.45s, transform 0.6s var(--ease); }
+.clay-hud.is-hidden { opacity: 0; pointer-events: none; transform: translateY(14px); }
+.clay-launch { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1.15rem 0.5rem 0.5rem; border-radius: 99px; background: rgba(20, 18, 16, 0.78); backdrop-filter: blur(16px); border: 1px solid var(--hair); color: var(--paper); transition: transform 0.6s var(--ease), opacity 0.4s, border-color 0.3s; }
+.clay-launch:hover, .clay-launch.is-live { border-color: var(--amber); transform: translateY(-3px); }
+.clay-launch.hide { opacity: 0; pointer-events: none; transform: translateY(12px) scale(0.9); }
+.clay-launch-t { display: grid; text-align: left; line-height: 1.12; }
+.clay-launch-t b { font-family: var(--f-display); font-weight: 600; font-size: 1rem; letter-spacing: 0.03em; }
+.clay-launch-t small { color: var(--grey); font-size: 0.56rem; }
+.clay-orb { width: 2.35rem; height: 2.35rem; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, #f5dfd0, var(--amber) 48%, #3c2114 86%); box-shadow: 0 0 22px rgba(232, 135, 58, 0.42); position: relative; flex: none; }
+.clay-orb i { position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(232, 135, 58, 0.45); opacity: 0; transition: opacity 0.3s; }
+.clay-launch.is-live .clay-orb i, .clay-launch:hover .clay-orb i { opacity: 1; animation: pulse 2.2s ease-out infinite; }
+
+.clay-panel { position: absolute; left: 0; bottom: 0; width: min(390px, calc(100vw - 1.8rem)); background: rgba(14, 13, 12, 0.92); backdrop-filter: blur(24px); border: 1px solid var(--hair); border-radius: 20px; box-shadow: 0 32px 100px rgba(0, 0, 0, 0.6); padding: 1rem 1.05rem; opacity: 0; transform: translateY(20px) scale(0.96); transform-origin: bottom left; pointer-events: none; visibility: hidden; transition: opacity 0.45s var(--ease), transform 0.55s var(--ease), visibility 0s 0.55s; }
+.clay-panel.open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
+.clay-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.8rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--hair); }
+.clay-title { font-family: var(--f-display); font-size: 1.18rem; font-weight: 600; margin: 0; letter-spacing: 0.03em; line-height: 1.1; }
+.clay-sub { margin: 0.3rem 0 0; color: var(--grey); font-size: 0.56rem; text-transform: none; letter-spacing: 0.02em; }
+.clay-head-actions { display: flex; gap: 0.35rem; flex: none; }
+.clay-act { padding: 0.32rem 0.62rem; border: 1px solid var(--hair); border-radius: 99px; font-size: 0.6rem; color: var(--paper); background: transparent; transition: all 0.25s; }
+.clay-act:hover { background: var(--paper); color: var(--black); border-color: var(--paper); }
+.clay-rows { display: grid; gap: 0.72rem; margin-top: 0.85rem; }
+.clay-row { display: grid; grid-template-columns: 3.4rem 1fr; align-items: center; gap: 0.5rem; }
+.clay-lbl { color: var(--grey); font-size: 0.6rem; }
+.clay-opts { display: flex; flex-wrap: wrap; gap: 0.32rem; }
+.clay-opt { padding: 0.32rem 0.65rem; border-radius: 99px; border: 1px solid var(--hair); background: transparent; color: rgba(239, 232, 218, 0.8); font-size: 0.6rem; transition: all 0.25s var(--ease); }
+.clay-opt:hover { border-color: var(--amber); color: var(--paper); }
+.clay-opt.on { background: var(--amber); border-color: var(--amber); color: var(--black); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .grain { display: none; }
@@ -154,4 +183,6 @@ html.cursor-live .cursor-dot, html.cursor-live .cursor-ring { opacity: 1; }
   .nav-chapter { display: none; }
   .sound .mono { display: none; }
   .menu-link .mask > span { font-size: clamp(2rem, 8vw, 3rem); }
+  .clay-launch-t small { display: none; }
+  .clay-launch { padding-right: 0.95rem; }
 }

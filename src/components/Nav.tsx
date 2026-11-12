@@ -119,7 +119,7 @@ export default function Nav() {
             ))}
           </ul>
         </nav>
-        <p className="menu-foot mono">Creativity first. Technology underneath.</p>
+        <p className="menu-foot mono">Where creativity meets technology.</p>
       </div>
     </>
   );

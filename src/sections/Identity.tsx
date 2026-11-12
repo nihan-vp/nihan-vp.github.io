@@ -91,8 +91,8 @@ export default function Identity() {
       </div>
 
       <div className="philosophy">
-        <h2 data-reveal="chars">Creativity first.</h2>
-        <h2 data-reveal="chars" className="dim">Technology underneath.</h2>
+        <h2 data-reveal="chars">Where creativity</h2>
+        <h2 data-reveal="chars" className="dim">meets technology.</h2>
         <div className="phil-grid">
           <p data-reveal="fade"><b>Build to understand.</b> Every project here began as a question — how does this work, and can it work better?</p>
           <p data-reveal="fade"><b>Show the work honestly.</b> What is built, what is research and what is only a goal are always kept apart.</p>

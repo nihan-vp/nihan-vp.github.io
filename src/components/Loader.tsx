@@ -43,8 +43,8 @@ export default function Loader({ onDone }: { onDone: () => void }) {
       </div>
       <div className="ld-center">
         <div className="ld-name" aria-hidden="true">
-          <div className="mask"><span>Creativity first.</span></div>
-          <div className="mask"><span><em>Technology underneath.</em></span></div>
+          <div className="mask"><span>Where creativity</span></div>
+          <div className="mask"><span><em>meets technology.</em></span></div>
         </div>
       </div>
       <div className="ld-meta mono">

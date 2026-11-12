@@ -67,3 +67,20 @@ export async function setSound(enable: boolean) {
     window.setTimeout(() => !on && ctx?.suspend(), 900);
   }
 }
+
+/** Subtle warm ceramic resonance on clay interaction; only sounds when visitor has opted into audio. */
+export function playClayTap(intensity = 0.6) {
+  if (!on || !ctx || !master || ctx.state !== "running") return;
+  const now = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(140 + intensity * 60, now);
+  osc.frequency.exponentialRampToValueAtTime(62, now + 0.22);
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.linearRampToValueAtTime(0.14 * Math.min(1, intensity), now + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+  osc.connect(gain).connect(master);
+  osc.start(now);
+  osc.stop(now + 0.3);
+}

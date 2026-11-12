@@ -21,24 +21,44 @@ export default function Cursor() {
       rx(e.clientX);
       ry(e.clientY);
     };
+    let domHover = false;
+    let clayLabel = "";
+    const syncRing = () => {
+      const r = ring.current;
+      if (!r || domHover) return;
+      if (clayLabel) {
+        r.classList.add("is-hover", "has-label");
+        if (label.current) label.current.textContent = clayLabel;
+      } else {
+        r.classList.remove("is-hover", "has-label");
+      }
+    };
     const over = (e: PointerEvent) => {
       const t = (e.target as HTMLElement).closest<HTMLElement>("a,button,[data-cursor],input,textarea");
       const r = ring.current!;
       if (t) {
+        domHover = true;
         const txt = t.dataset.cursor;
         r.classList.add("is-hover");
         r.classList.toggle("has-label", !!txt);
         if (label.current) label.current.textContent = txt || "";
       } else {
-        r.classList.remove("is-hover", "has-label");
+        domHover = false;
+        syncRing();
       }
+    };
+    const onClay = (e: Event) => {
+      clayLabel = (e as CustomEvent<string>).detail || "";
+      syncRing();
     };
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerover", over);
+    window.addEventListener("clay-cursor", onClay);
     return () => {
       document.documentElement.classList.remove("has-cursor");
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerover", over);
+      window.removeEventListener("clay-cursor", onClay);
     };
   }, []);
 
